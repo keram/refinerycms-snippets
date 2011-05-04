@@ -1,0 +1,21 @@
+nb:
+  plugins:
+    snippets:
+      title: Snippets
+  admin:
+    snippets:
+      actions:
+        create_new: Lag en ny Snippet
+        reorder: Endre rekkefølgen på Snippets
+        reorder_done: Ferdig å endre rekkefølgen Snippets
+      records:
+        title: Snippets
+        sorry_no_results: Beklager! Vi fant ikke noen resultater.
+        no_items_yet: Det er ingen Snippets enda. Klikk på "Lag en ny Snippet" for å legge til din første snippet.
+      snippet:
+        view_live_html: Vis hvordan denne snippet ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+        edit: Rediger denne snippet
+        delete: Fjern denne snippet permanent
+  snippets:
+    show:
+      other: Andre Snippets

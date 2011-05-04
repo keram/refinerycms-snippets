@@ -1,0 +1,25 @@
+lolcat:
+  shared:
+    admin:
+      image_picker:
+        image: IMAGE
+  plugins:
+    snippets:
+      title: Snippets
+  admin:
+    snippets:
+      actions:
+        create_new: CREATE NEW Snippet
+        reorder: REORDR Snippets
+        reorder_done: DUN REORDERIN Snippets
+      records:
+        title: Snippets
+        sorry_no_results: SRY! THAR R NO RESULTS FINDZ.
+        no_items_yet: THAR R NO Snippets YET. CLICK "CREATE NEW Snippet" 2 ADD UR FURST snippet.
+      snippet:
+        view_live_html: VIEW DIS snippet LIV <BR/><EM>(OPENS IN NEW WINDOW)</EM>
+        edit: EDIT DIS snippet
+        delete: REMOOV DIS snippet FOREVR
+  snippets:
+    show:
+      other: OTHR Snippets

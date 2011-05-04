@@ -1,0 +1,25 @@
+en:
+  shared:
+    admin:
+      image_picker:
+        image: image
+  plugins:
+    snippets:
+      title: Snippets
+  admin:
+    snippets:
+      actions:
+        create_new: Add New Snippet
+        reorder: Reorder Snippets
+        reorder_done: Done Reordering Snippets
+      records:
+        title: Snippets
+        sorry_no_results: Sorry! There are no results found.
+        no_items_yet: There are no Snippets yet. Click "Add New Snippet" to add your first snippet.
+      snippet:
+        view_live_html: View this snippet live <br/><em>(opens in a new window)</em>
+        edit: Edit this snippet
+        delete: Remove this snippet forever
+  snippets:
+    show:
+      other: Other Snippets
