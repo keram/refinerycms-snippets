@@ -1,12 +1,8 @@
-<div class='wym_skin_refinery page_part' id='page_image_picker'>
+<div class='wym_skin_refinery page_part' id='page_snippet_picker' style="padding: 5px;">
   <%= render :partial => '/admin/pages/tabs/snippets_bar', :locals => {:f => f} %>
   <%= render :partial => '/admin/pages/tabs/snippets_field', :locals => {:f => f} %>
 </div>
 
-<%# content_for :stylesheets do %>
-  <%#= stylesheet_link_tag 'page-image-picker' %>
-<%# end %>
-
-<%# content_for :javascripts do %>
-  <%#= javascript_include_tag 'page-image-picker' %>
-<%# end %>
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'page-snippet-picker' %>
+<% end %>
