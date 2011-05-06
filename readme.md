@@ -15,6 +15,11 @@ Snippets allows you to relate one or more html blocks to any page in Refinery.
 * Documentation
 * Tests 
 
+### to 2.0
+* custom attributes for snippet (id, classes etc)
+* support for dynamic snippets (erb templates, forms etc)
+* improve UI 
+
 ## Install
 
 Add this line to your applications `Gemfile`
@@ -41,3 +46,8 @@ Next run
 	  <% end %>
 	<% end %>
 	<%= render :partial => "/shared/content_page" %>
+
+## Donate
+
+Feel free buy me some gift ;-)
+http://www.amazon.com/gp/registry/wishlist/1BBMUW9DDYXFF
