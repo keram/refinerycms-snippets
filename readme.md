@@ -13,6 +13,7 @@ Snippets allows you to relate one or more html blocks to any page in Refinery.
 ### to 1.0
 * Snippet selector in page administration.
 * Documentation
+* Tests 
 
 ## Install
 
@@ -27,6 +28,10 @@ Next run
     rake db:migrate
 
 ## Usage
+
+* Create Snippet on /refinery/snippets
+* Add (in database table snippet_pages ;/ temporarily ) snippet to page
+* Add something like this to: 
 
 `app/views/pages/show.html.erb`
 
