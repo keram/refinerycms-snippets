@@ -5,7 +5,14 @@ class Snippet < ActiveRecord::Base
   validates :title, :presence => true, :uniqueness => true
 
   translates :body
-  
+
+  def self.inactive(page)
+      @page = page
+      snippets = scoped      
+      snippets = snippets.where('id NOT IN (?)', @page.snippets) unless @page.snippets.empty?
+      snippets
+  end
+
   # rejects any page that has not been translated to the current locale.
   scope :translated, lambda {
     pages = Arel::Table.new(Snippet.table_name)

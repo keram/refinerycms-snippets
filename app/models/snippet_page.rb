@@ -6,5 +6,5 @@ class SnippetPage < ActiveRecord::Base
   before_save do |snippet_page|
     snippet_page.position = (SnippetPage.maximum(:position) || -1) + 1
   end
-
+  
 end

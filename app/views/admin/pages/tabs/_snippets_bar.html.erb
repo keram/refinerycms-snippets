@@ -1,12 +1,12 @@
 <div class='wym_area_top'>
   <div style="padding: 5px 0;">
     <%
-    
-      inactive_snippets = Snippet.where('id NOT IN (?)', @page.snippets).map { |snippet| [snippet.title, snippet.id] }
+          
+      inactive_snippets = Snippet.inactive(@page).map { |snippet| [snippet.title, snippet.id] }
       inactive_snippets.unshift(['Select snippet', ''])
       
     %>
     <%= select_tag(:inactive_snippets, options_for_select(inactive_snippets)) %>
-    <a href="javascript:void(0);" id="add-snippet" class="add_icon" type="submit" style="background-repeat: no-repeat;background-position: left center;border: none; padding: 2px 12px 2px 20px">Add</a>
+    <a href="javascript:void(0);" id="add-snippet" class="add_icon" style="background-repeat: no-repeat; background-position: left center;border: none; padding: 2px 12px 2px 20px">Add</a>
   </div>
 </div>

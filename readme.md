@@ -20,6 +20,7 @@ Snippets allows you to relate one or more html blocks to any page in Refinery.
 * custom attributes for snippet (id, classes etc)
 * support for dynamic snippets (erb templates, forms etc)
 * improve UI 
+* inheritance and clone 
 
 ## Install
 
