@@ -9,8 +9,8 @@ module Refinery
       
       config.to_prepare do
         Page.module_eval do
-          has_many :snippet_pages
-          has_many :snippets, :through => :snippet_pages, :order => 'position ASC'
+          has_many :snippet_page
+          has_many :snippets, :through => :snippet_page, :order => 'position ASC'
         end
       end
 
@@ -21,9 +21,13 @@ module Refinery
         end
         Refinery::Plugin.register do |plugin|
           plugin.name = "snippets"
-          plugin.activity = {
+          plugin.url = {:controller => '/admin/snippets'}
+          plugin.menu_match = /^\/?(admin|refinery)\/snippets/
+          plugin.activity = [{
             :class => Snippet
-	  }
+          }, {
+            :class => SnippetPage
+          }]
         end
       end
     end

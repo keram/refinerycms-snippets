@@ -7,6 +7,6 @@
       
     %>
     <%= select_tag(:inactive_snippets, options_for_select(inactive_snippets)) %>
-    <a href="javascript:void(0);" id="add-snippet" class="add_icon" style="background-repeat: no-repeat; background-position: left center;border: none; padding: 2px 12px 2px 20px">Add</a>
+    <a href="<%= admin_snippets_pages_path(:page_id => @page.id.to_s) %>" id="add-snippet" class="add_icon" style="background-repeat: no-repeat; background-position: left center;border: none; padding: 2px 12px 2px 20px">Add</a>
   </div>
 </div>

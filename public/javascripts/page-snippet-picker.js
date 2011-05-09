@@ -5,8 +5,6 @@ $(document).ready(function(){
 	 */
 	var PageSnippet = {
 		processing: false,
-		add_url: '', // something like => /refinery/pages/home/add-snippet/1
-		update_url: '', // => /refinery/pages/home/remove-snippet/1
 		content_holder: [], // html wrapper for all stuff
 		add_snippet: [], // add snippet anchor
 		inactive_snippets: [], // select box with inactive snippets on page
@@ -26,8 +24,9 @@ $(document).ready(function(){
 
 		update: function (html) {
 			this.clear();
-			this.content_holder.html(html);
+			this.content_holder.html(html);			
 			this.bind();
+			this.spinner_off();		
 		},
 
 		add: function () {
@@ -36,27 +35,27 @@ $(document).ready(function(){
 			if (!this.processing) {
 				var selected_item = this.inactive_snippets.find('option:selected'),
 					selected_id = null,
-					values = [];
+					values = [],
+					add_url = this.add_snippet.attr('href');
 
 				if (selected_item.length > 0 && selected_item.val() !== '') {
 					this.spinner_on();
-					console.log('add start');
+				
+					add_url += '&add=' + selected_item.val();
+					
+					$.ajax({
+						url: add_url,
+						type: 'GET',
+						dataType: 'html',
+						error: function (response) { alert(response); },
+						complete: function (e) {
+							// console.log(e);
+						},
+						success: function (response) {
 
-					selected_id = selected_item.val();
-//					$.ajax(
-//						url: that.add_url,
-//						method: 'POST',
-//						values: values,
-//						error: function (response) { },
-//						succes: function (response) {
-//							that.update(response);
-//						}
-//					);
-
-					// for test
-					setTimeout(function () {
-						that.spinner_off();						
-					}, 3000);
+							that.update(response);
+						}
+					});
 				} else {
 					this.processing = false;
 				}
@@ -64,27 +63,28 @@ $(document).ready(function(){
 		},
 
 		remove: function (elm) {
-			var that = this;
+			var that = this,
+				remove_url = $(elm).attr('href');
 
 			if (!this.processing) {
 				var values = [];
 				this.spinner_on();
 				
-				console.log('remove start');
-//				$.ajax(
-//					url: that.remove_url,
-//					method: 'POST',
-//					values: values,
-//					error: function (response) { },
-//					succes: function (response) {
+				// console.log('remove start');
+				$.ajax({
+					url: remove_url,
+					dataType: 'html',
+					error: function (response) { 
+						alert(response); 
+					},
+					complete: function (e) {
+						// console.log(e);
+					},
+					success: function (response) {
+						// console.log('pleas');
 						that.update(response);
-//					}
-//				);
-
-				// for test
-				setTimeout(function () {
-					that.spinner_off();
-				}, 3000);
+					}
+				});
 			}
 		},
 
@@ -92,7 +92,7 @@ $(document).ready(function(){
 		 * Remove event handlers and other smells
 		 */
 		clear: function () {
-			console.log('start clear');
+			// console.log('start clear');
 			this.content_holder.find('a').unbind('click');
 			this.add_snippet.unbind('click');
 		},
@@ -109,6 +109,7 @@ $(document).ready(function(){
 				that.add();
 				return false;
 			});
+			
 			$('a.remove-snippet').click(function (e) {
 				e.preventDefault();
 				that.remove(this);

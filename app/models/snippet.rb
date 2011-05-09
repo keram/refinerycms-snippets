@@ -1,10 +1,12 @@
 class Snippet < ActiveRecord::Base
-
+  
   acts_as_indexed :fields => [:title, :body]
 
   validates :title, :presence => true, :uniqueness => true
 
   translates :body
+  
+#  has_many :pages, :through => :snippets_pages
 
   def self.inactive(page)
       @page = page

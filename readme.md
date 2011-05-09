@@ -37,7 +37,7 @@ Next run
 ## Usage
 
 * Create Snippet on /refinery/snippets
-* Add (in database table snippet_pages ;/ temporarily ) snippet to page
+* -Add (in database table snippets_pages ;/ temporarily ) snippet to page-
 * Add something like this to: 
 
 `app/views/pages/show.html.erb`

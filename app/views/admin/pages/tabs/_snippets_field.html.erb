@@ -17,7 +17,7 @@
     <span class='actions'>
       <%= link_to refinery_icon_tag("application_edit.png"), edit_admin_snippet_path(snippet),
            :title => t('.edit') %>
-      <%= link_to refinery_icon_tag("delete.png"), admin_snippet_path(snippet),
+      <%= link_to refinery_icon_tag("delete.png"), admin_snippets_pages_path(:page_id => @page.id, 'remove' => snippet.id),
           :title => t('.remove'),
           :class => 'remove-snippet' %>
     </span>
