@@ -6,7 +6,7 @@ Snippets allows you to relate one or more html blocks to any page in Refinery.
 
 ## Requirements
 
-* refinerycms >= 0.9.9
+* RefineryCMS with 'Pages' engine (refinerycms-pages >= 0.9.9.1)
 
 ## TODO
 
