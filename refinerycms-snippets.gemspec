@@ -9,4 +9,6 @@ Gem::Specification.new do |s|
   s.email             = %q{nospam.keram@gmail.com}
   s.require_paths     = %w(lib)
   s.files             = Dir['lib/**/*', 'config/**/*', 'app/**/*', 'db/**/*', 'public/**/*']
+  
+  s.add_dependency    'refinerycms-pages', '>= 0.9.9.1'
 end
