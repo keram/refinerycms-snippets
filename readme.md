@@ -11,7 +11,7 @@ Snippets allows you to relate one or more html blocks to any page in Refinery.
 ## TODO
 
 ### to 1.0
-* Snippet selector in page administration.
+* Snippet selector in page administration. -- done
 * Save and Continue button 
 * Documentation
 * Tests 
@@ -26,7 +26,7 @@ Snippets allows you to relate one or more html blocks to any page in Refinery.
 
 Add this line to your applications `Gemfile`
 
-    gem 'refinerycms-snippets', '~> 0.1'
+    gem 'refinerycms-snippets', '~> 0.3.1'
 
 Next run
 
@@ -37,8 +37,8 @@ Next run
 ## Usage
 
 * Create Snippet on /refinery/snippets
-* -Add (in database table snippets_pages ;/ temporarily ) snippet to page-
-* Add something like this to: 
+* Now you can attach snippet to page when you click Edit this page on `/refinery/pages`
+* Next add something like this to: 
 
 `app/views/pages/show.html.erb`
 
@@ -48,6 +48,11 @@ Next run
 	  <% end %>
 	<% end %>
 	<%= render :partial => "/shared/content_page" %>
+
+## Screenshots
+
+![Create/Edit Snippet] (http://farm3.static.flickr.com/2150/5702424159_a688bfd7dd_b.jpg)
+![Snippets Administration] (http://farm3.static.flickr.com/2018/5702979460_3126471546_b.jpg)
 
 ## Donate
 
