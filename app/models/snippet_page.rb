@@ -1,9 +1,9 @@
 class SnippetPage < ActiveRecord::Base
   
-  set_table_name 'snippets_pages'
+  set_table_name 'snippet_page'
   
-  belongs_to :snippet, :foreign_key => :snippet_id, :dependent => :destroy
-  belongs_to :page, :foreign_key => :page_id, :dependent => :destroy
+  belongs_to :snippet, :foreign_key => :snippet_id
+  belongs_to :page, :foreign_key => :page_id
   
   validates_uniqueness_of(:snippet_id, :scope => :page_id)
 

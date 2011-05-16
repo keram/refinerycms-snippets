@@ -8,9 +8,6 @@ class CreateSnippets < ActiveRecord::Migration
       t.timestamps
     end
 
-# we have primary key, thus we don't need duplicate index with them
-#    add_index :snippets, :id
-
     load(Rails.root.join('db', 'seeds', 'snippets.rb'))
   end
 

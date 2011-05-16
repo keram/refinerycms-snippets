@@ -1,7 +1,3 @@
-<div class='wym_skin_refinery page_part' id='page_snippet_picker' style="padding: 5px;">
+<div class="wym_skin_refinery page_part" id="page_snippet_picker">
   <%= render :partial => '/admin/pages/tabs/snippets_content', :locals => {:f => f} %>
 </div>
-
-<% content_for :javascripts do %>
-  <%= javascript_include_tag 'page-snippet-picker' %>
-<% end %>

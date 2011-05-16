@@ -1,2 +1,8 @@
-<%= render :partial => '/admin/pages/tabs/snippets_bar' %>
 <%= render :partial => '/admin/pages/tabs/snippets_field' %>
+
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag 'page-snippet-picker' %>
+<% end %>
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'page-snippet-picker' %>
+<% end %>

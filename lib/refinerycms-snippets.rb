@@ -9,7 +9,7 @@ module Refinery
       
       config.to_prepare do
         Page.module_eval do
-          has_many :snippet_page
+          has_many :snippet_page, :dependent => :destroy
           has_many :snippets, :through => :snippet_page, :order => 'position ASC'
         end
       end

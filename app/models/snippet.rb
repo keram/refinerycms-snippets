@@ -5,8 +5,9 @@ class Snippet < ActiveRecord::Base
   validates :title, :presence => true, :uniqueness => true
 
   translates :body
-  
-#  has_many :pages, :through => :snippets_pages
+
+  has_many :snippet_page, :dependent => :destroy
+  has_many :pages, :through => :snippet_page
 
   def self.inactive(page)
       @page = page

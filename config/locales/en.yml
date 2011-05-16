@@ -1,8 +1,4 @@
 en:
-  shared:
-    admin:
-      image_picker:
-        image: image
   plugins:
     snippets:
       title: Snippets
@@ -20,6 +16,14 @@ en:
         view_live_html: View this snippet live <br/><em>(opens in a new window)</em>
         edit: Edit this snippet
         delete: Remove this snippet forever
+    pages:
+      tabs:
+        snippets_field:
+          active: Active
+          inactive: Inactive
+          remove: Remove
+          edit: Edit
+          add: Add
   snippets:
     show:
       other: Other Snippets
