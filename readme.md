@@ -13,6 +13,7 @@ Snippets allows you to relate one or more html blocks to any page in Refinery.
 ### to 1.0
 * Snippet selector in page administration. -- done
 * Save and Continue button 
+* Attaching snippet to page part directly through administration, without overriding view template
 * Documentation
 * Tests 
 
