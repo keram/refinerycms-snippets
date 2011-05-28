@@ -18,6 +18,8 @@ en:
         delete: Remove this snippet forever
     pages:
       tabs:
+        snippets_content:
+          please_save_page_before: Please save this page before you can add any snippets.
         snippets_field:
           active: Active
           inactive: Inactive

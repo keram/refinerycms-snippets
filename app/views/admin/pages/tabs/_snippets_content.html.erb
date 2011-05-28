@@ -1,4 +1,8 @@
+<% if @page.new_record? %>
+<div class="msg alert"><%= t('.please_save_page_before') %></div>
+<% else %>
 <%= render :partial => '/admin/pages/tabs/snippets_field' %>
+<% end %>
 
 <% content_for :stylesheets do %>
   <%= stylesheet_link_tag 'page-snippet-picker' %>

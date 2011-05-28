@@ -27,3 +27,13 @@ a.add-snippet {
 #inactive-snippets ul {
 	background: #fcfcfc;
 }
+
+.msg {
+	margin: 5px 5px 10px;
+	padding: 20px;
+}
+
+.msg.alert {
+	color: #f66;
+	background: #fff;
+}
