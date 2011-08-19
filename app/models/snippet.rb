@@ -17,6 +17,16 @@ class Snippet < ActiveRecord::Base
     }
   }
 
+  named_scope :before, {
+    :joins => :page_parts,
+    :conditions => {:snippets_page_parts => {:before_body => true}}
+  }
+
+  named_scope :after, {
+    :joins => :page_parts,
+    :conditions => {:snippets_page_parts => {:before_body => false}}
+  }
+  
   def self.inactive(page)
     @page = page
     snippets = scoped

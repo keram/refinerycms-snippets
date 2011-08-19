@@ -17,19 +17,7 @@ module Refinery
           has_many :snippet_page_parts, :dependent => :destroy
           has_many :snippets, :through => :snippet_page_parts, :order => 'position ASC'
         end
-        Page.module_eval do
-          # TODO: eliminar
-          # has_many :snippet_page, :dependent => :destroy
-          # has_many :snippets, :through => :snippet_page, :order => 'position ASC'
-          named_scope :for_snippet, lambda{ |snippet|
-            raise RuntimeError.new("Couldn't find Pages for a nil Snippet") if snippet.blank? 
-            {
-              :joins => {:parts, :snippets},
-              :conditions => {:snippets_page_parts => {:snippet_id => snippet.id}}
-            }
-          }
-        end
-        Page.send :included, Extensions::Page
+        Page.send :include, Extensions::Page
       end
 
       config.after_initialize do
