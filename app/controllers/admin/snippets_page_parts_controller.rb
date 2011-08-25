@@ -1,14 +1,15 @@
 module Admin
-  class SnippetsPageController < Admin::BaseController
+  class SnippetsPagePartsController < Admin::BaseController
     
     def add
       @page = Page.find(params[:id])
+      @part = PagePart.find(params[:part_id])
       @snippet = Snippet.find(params[:snippet_id])
 
-      sp = SnippetPage.new(:page => @page, :snippet => @snippet)
+      sp = SnippetPagePart.new(:page_part => @part, :snippet => @snippet)
 
       if sp.save
-         flash[:notice] = "Snippet #{@snippet.title} was successfully added to page."
+         flash[:notice] = "Snippet #{@snippet.title} was successfully added."
       end
       
       render :layout => false if request.xhr?
@@ -16,14 +17,15 @@ module Admin
 
     def remove
       @page = Page.find(params[:id])
+      @part = PagePart.find(params[:part_id])
       @snippet = Snippet.find(params[:snippet_id])
 
-      sp = SnippetPage.where(:page_id => @page, :snippet_id => @snippet)
+      sp = SnippetPagePart.where(:page_part_id => @page, :snippet_id => @snippet)
       
       removed = sp.first.destroy() unless sp.empty?
 
       if removed
-         flash[:notice] = "Snippet #{@snippet.title} was successfully removed from page."
+         flash[:notice] = "Snippet #{@snippet.title} was successfully removed."
       end
       
       render :layout => false if request.xhr?

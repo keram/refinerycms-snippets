@@ -1,7 +1,7 @@
 <% if @page.new_record? %>
 <div class="msg alert"><%= t('.please_save_page_before') %></div>
 <% else %>
-<%= render :partial => '/admin/pages/tabs/snippets_field' %>
+<%= render :partial => '/admin/pages/tabs/snippets_field', :collection => @page.parts, :as => :part %>
 <% end %>
 
 <% content_for :stylesheets do %>

@@ -1,8 +1,9 @@
 <div id="active-snippets">
-<% if @page.snippets.any? %>
+<h1><%= part.title %></h1>
+<% if part.snippets.any? %>
   <h2><%= t('.active') %></h2>
   <ul>
-  <% @page.snippets.each do |snippet| %>
+  <% part.snippets.each do |snippet| %>
     <li class='clearfix record <%= cycle('on', 'on-hover') %>' >
     <span class='title'>
       <%= snippet.title %>
@@ -18,7 +19,7 @@
     <span class='actions'>
       <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_snippet_path(snippet),
            :title => t('.edit') %>
-      <%= link_to refinery_icon_tag('delete.png'), url_for({:controller => 'snippets_page', :action => 'remove', :snippet_id => snippet.id, :id => @page.id}),
+      <%= link_to refinery_icon_tag('delete.png'), url_for({:controller => 'snippets_page_parts', :action => 'remove', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}),
           :title => t('.remove'),
           :class => 'remove-snippet' %>
     </span>
@@ -29,7 +30,7 @@
 </div>
 
 <div id="inactive-snippets">
-<% inactive_snippets = Snippet.inactive(@page) %>
+<% inactive_snippets = Snippet.all %>
 <% if inactive_snippets.length > 0 %>
   <h2><%= t('.inactive') %></h2>
   <ul>
@@ -37,7 +38,7 @@
     <li class='clearfix record <%= cycle('on', 'on-hover') %>' >
       <span class="title"><%= snippet.title %></span>
       <span class="actions">
-        <a class="add_icon add-snippet" href="<%= url_for({:controller => 'snippets_page', :action => 'add', :snippet_id => snippet.id, :id => @page.id}) %>">Add</a>
+        <a class="add_icon add-snippet" href="<%= url_for({:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}) %>">Add</a>
       </span>
     </li>
     <% end %>
