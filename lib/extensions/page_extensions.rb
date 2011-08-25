@@ -2,9 +2,9 @@ module Extensions
   module Page
 
     def self.included(base)
-      
+
       base.class_eval do
-        
+
         named_scope :for_snippet, lambda{ |snippet|
           raise RuntimeError.new("Couldn't find Pages for a nil Snippet") if snippet.blank?
           {
@@ -12,7 +12,7 @@ module Extensions
             :conditions => {:snippets_page_parts => {:snippet_id => snippet.id}}
           }
         }
-        
+
         alias_method :content_without_snippets_for, :content_for
         # Accessor method to get a page part from a page.
         # Example:
@@ -32,6 +32,10 @@ module Extensions
           content += part.snippets.before.map{|snippet| snippet.try(:body)}.join
           content += part.try(:body)
           content += part.snippets.after.map{|snippet| snippet.try(:body)}.join
+        end
+
+        def snippets
+          Snippet.for_page(self)
         end
 
       end

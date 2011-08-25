@@ -26,7 +26,7 @@ class Snippet < ActiveRecord::Base
     :joins => :page_parts,
     :conditions => {:snippets_page_parts => {:before_body => false}}
   }
-  
+
   def self.inactive(page)
     @page = page
     snippets = scoped
@@ -42,4 +42,9 @@ class Snippet < ActiveRecord::Base
     includes(:translations).where(
                                   translations[:locale].eq(Globalize.locale)).where(pages[:id].eq(translations[:snippet_id]))
   }
+
+  def pages
+    Page.for_snippet(self)
+  end
+
 end
