@@ -11,29 +11,13 @@ class Snippet < ActiveRecord::Base
 
   named_scope :for_page, lambda{ |page|
     raise RuntimeError.new("Couldn't find Snippet for a nil Page") if page.blank?
-    {
-      :joins => {:page_parts, :page},
-      :conditions => {:pages => {:id => page.id}}
-    }
+    joins(:page_parts => :page).where(:pages => {:id => page.id})
+
   }
 
-  named_scope :before, {
-    :joins => :snippet_page_parts,
-    :conditions => {:snippets_page_parts => {:before_body => true}}
-  }
-
-  named_scope :after, {
-    :joins => :snippet_page_parts,
-    :conditions => {:snippets_page_parts => {:before_body => false}}
-  }
-
-  def self.inactive(page)
-    @page = page
-    snippets = scoped
-    snippets = snippets.where('id NOT IN (?)', @page.snippets) unless @page.snippets.empty?
-    snippets
-  end
-
+  scope :before, where(:snippets_page_parts => {:before_body => true})
+  scope :after, where(:snippets_page_parts => {:before_body => false}) 
+  
   # rejects any page that has not been translated to the current locale.
   scope :translated, lambda {
     pages = Arel::Table.new(Snippet.table_name)
@@ -45,6 +29,14 @@ class Snippet < ActiveRecord::Base
 
   def pages
     Page.for_snippet(self)
+  end
+
+  def before?(part)
+    part.snippets.before.include? self
+  end
+
+  def after?(part)
+    part.snippets.after.include? self
   end
 
 end
