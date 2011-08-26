@@ -20,11 +20,11 @@ a.add-snippet {
 	margin-bottom: 5px;
 }
 
-#active-snippets ul {
+.active-snippets ul {
 	margin-bottom: 15px;
 }
 
-#inactive-snippets ul {
+.inactive-snippets ul {
 	background: #fcfcfc;
 }
 
@@ -36,4 +36,16 @@ a.add-snippet {
 .msg.alert {
 	color: #f66;
 	background: #fff;
+}
+
+#page_snippet_picker h1 {
+   text-align: left;
+}
+
+.part-snippets {
+   margin-bottom: 5ex;
+}
+
+.part-snippets:last-child {
+   margin-bottom: 0;
 }
