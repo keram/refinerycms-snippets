@@ -1,31 +1,16 @@
 <div class="part-snippets">
   <div class="active-snippets">
     <h1><%= part.title %></h1>
-    <% if part.snippets.any? %>
-      <h2><%= t('.active') %></h2>
+    <% if part.snippets.before.any? %>
+      <h2><%= t('.before_body') %></h2>
       <ul>
-        <% part.snippets.each do |snippet| %>
-          <li class='clearfix record <%= cycle('on', 'on-hover') %>' >
-            <span class='title'>
-              <%= snippet.title %>
-              <% if ::Refinery::I18n.frontend_locales.many? and
-                     (locales = snippet.translations.collect{|t| t.locale}).present? %>
-                <span class='preview'>
-                  <% locales.each do |locale| %>
-                    <%= refinery_icon_tag "flags/#{locale}.png", :size => '16x11' %>
-                  <% end %>
-                </span>
-              <% end %>
-            </span>
-            <span class='actions'>
-              <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_snippet_path(snippet),
-                  :title => t('.edit') %>
-              <%= link_to refinery_icon_tag('delete.png'), url_for({:controller => 'snippets_page_parts', :action => 'remove', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}),
-                  :title => t('.remove'),
-                  :class => 'remove-snippet' %>
-            </span>
-          </li>
-        <% end %>
+        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.before, :as => :snippet, :locals => {:part => part, :before_body => true} %>
+      </ul>
+    <% end %>
+    <% if part.snippets.after.any? %>
+      <h2><%= t('.after_body') %></h2>
+      <ul>
+        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.after, :as => :snippet, :locals => {:part => part, :before_body => false} %>
       </ul>
     <% end %>
   </div>
@@ -39,7 +24,8 @@
           <li class='clearfix record <%= cycle('on', 'on-hover') %>' >
             <span class="title"><%= snippet.title %></span>
             <span class="actions">
-              <a class="add_icon add-snippet" href="<%= url_for({:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}) %>">Add</a>
+              <a class="add_icon add-snippet" href="<%= url_for({:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}) %>"><%= t('.add_after_body') %></a>
+              <a class="add_icon add-snippet" href="<%= url_for({:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => 'true'}) %>"><%= t('.add_before_body') %></a>
             </span>
           </li>
         <% end %>

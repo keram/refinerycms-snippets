@@ -5,8 +5,9 @@ module Admin
       @page = Page.find(params[:id])
       @part = PagePart.find(params[:part_id])
       @snippet = Snippet.find(params[:snippet_id])
-
-      sp = SnippetPagePart.new(:page_part => @part, :snippet => @snippet)
+      before_body = params[:before_body] == 'true' ? true : false
+      
+      sp = SnippetPagePart.new(:page_part => @part, :snippet => @snippet, :before_body => before_body)
 
       if sp.save
          flash[:notice] = "Snippet #{@snippet.title} was successfully added."
@@ -19,8 +20,9 @@ module Admin
       @page = Page.find(params[:id])
       @part = PagePart.find(params[:part_id])
       @snippet = Snippet.find(params[:snippet_id])
+      before_body = params[:before_body] == 'true' ? true : false
 
-      sp = SnippetPagePart.where(:page_part_id => @page, :snippet_id => @snippet)
+      sp = SnippetPagePart.where(:page_part_id => @part, :snippet_id => @snippet, :before_body => before_body)
       
       removed = sp.first.destroy() unless sp.empty?
 
