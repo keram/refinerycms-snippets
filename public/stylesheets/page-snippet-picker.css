@@ -6,11 +6,18 @@
         Styles for snippets administrations
 */
 
-a.add-snippet {
+a.add-snippet,
+span.add-snippet {
 	background-repeat: no-repeat;
 	background-position: left center;
 	border: none; 
 	padding-left: 20px;
+}
+
+span.add-snippet {
+   float: right;
+   color: lightGray;
+   margin: 3px;
 }
 
 #page_snippet_picker ul {
@@ -48,4 +55,8 @@ a.add-snippet {
 
 .part-snippets:last-child {
    margin-bottom: 0;
+}
+
+#page_snippet_picker div.actions {
+   display: inline;
 }
