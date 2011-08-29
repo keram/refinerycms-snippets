@@ -20,7 +20,7 @@ span.add-snippet {
    margin: 3px;
 }
 
-#page_snippet_picker ul {
+.part-snippets ul {
 	background: #fff;
 	padding: 10px;
 	padding-bottom: 0px;
@@ -58,5 +58,13 @@ span.add-snippet {
 }
 
 #page_snippet_picker div.actions {
+   display: inline;
+}
+
+#part-snippets-menu {
+   margin: 1ex;
+}
+
+#part-snippets-menu li {
    display: inline;
 }
