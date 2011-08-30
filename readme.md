@@ -27,7 +27,7 @@ Snippets allows you to relate one or more html blocks to any page in Refinery. T
 
 Add this line to your applications `Gemfile`
 
-    gem 'refinerycms-snippets', '~> 0.3.1'
+    gem 'refinerycms-snippets', '~> 0.4.1'
 
 Next run
 
