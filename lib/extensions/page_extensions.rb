@@ -29,9 +29,9 @@ module Extensions
           end
 
           content = ""
-          content += part.snippets.before.map{|snippet| snippet.try(:body)}.join
+          content += part.snippets.before.map{|snippet| snippet.try(:content)}.join
           content += part.try(:body)
-          content += part.snippets.after.map{|snippet| snippet.try(:body)}.join
+          content += part.snippets.after.map{|snippet| snippet.try(:content)}.join
         end
 
         def snippets

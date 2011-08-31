@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe Snippet do
@@ -29,7 +30,7 @@ describe Snippet do
 
   end
 
-  it 'should return the page it is attached' do
+  it 'should return the page it is attached to' do
     @snippet.pages.should be_empty
     page = Page.create!(:title => 'Page')
     2.times do
@@ -40,6 +41,27 @@ describe Snippet do
     @snippet.pages.each do |p|
       p.title.should_not == page.title
     end
+  end
+
+  it 'should sanitize its title for a filename' do
+    @snippet.template_filename.should == '_rspec_is_great_for_testing_too.html.erb'
+    @snippet.title = '/dir & folder/FooÑBar'
+    @snippet.template_filename.should == '_dir_folder_foo_bar.html.erb'
+  end
+
+  it 'should return its default template' do
+    mock_action_view = mock('mock_action_view')
+    ActionView::Base.stub!(:new).and_return(mock_action_view)
+    mock_action_view.should_receive(:render).with({:file =>'shared/snippets/_rspec_is_great_for_testing_too.html.erb', :locals => {:snippet => @snippet}}).and_return('HTML')
+    @snippet.content.should == 'HTML'
+  end
+
+  it 'should return its body if template not available' do
+    mock_action_view = mock('mock_action_view')
+    ActionView::Base.stub!(:new).and_return(mock_action_view)
+    mock_action_view.should_receive(:render).with({:file =>'shared/snippets/_rspec_is_great_for_testing_too.html.erb', :locals => {:snippet => @snippet}}).and_raise(ActionView::MissingTemplate.new([],nil,nil,nil))
+    @snippet.body = 'BODY'
+    @snippet.content.should == 'BODY'
   end
 
 end

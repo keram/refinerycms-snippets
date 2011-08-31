@@ -16,8 +16,8 @@ class Snippet < ActiveRecord::Base
   }
 
   scope :before, where(:snippets_page_parts => {:before_body => true})
-  scope :after, where(:snippets_page_parts => {:before_body => false}) 
-  
+  scope :after, where(:snippets_page_parts => {:before_body => false})
+
   # rejects any page that has not been translated to the current locale.
   scope :translated, lambda {
     pages = Arel::Table.new(Snippet.table_name)
@@ -37,6 +37,20 @@ class Snippet < ActiveRecord::Base
 
   def after?(part)
     part.snippets.after.include? self
+  end
+
+  def template_filename
+    filename = self.title.strip.gsub(/[^A-Za-z0-9]/,'_').squeeze('_').downcase
+    filename = "_#{filename}" unless filename.start_with?('_')
+    "#{filename}.html.erb"
+  end
+
+  def content
+    begin
+      return ActionView::Base.new(Rails.configuration.paths.app.views.first).render(:file => "shared/snippets/#{self.template_filename}", :locals => {:snippet => self})
+    rescue ActionView::MissingTemplate
+      self.body
+    end
   end
 
 end
