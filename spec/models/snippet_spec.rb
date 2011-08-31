@@ -50,17 +50,18 @@ describe Snippet do
   end
 
   it 'should return its default template' do
-    mock_action_view = mock('mock_action_view')
-    ActionView::Base.stub!(:new).and_return(mock_action_view)
-    mock_action_view.should_receive(:render).with({:file =>'shared/snippets/_rspec_is_great_for_testing_too.html.erb', :locals => {:snippet => @snippet}}).and_return('HTML')
-    @snippet.content.should == 'HTML'
+    file = File.open("#{RAILS_ROOT}/app/views/shared/snippets/#{@snippet.template_filename}", 'w')
+    file.write("<%= snippet.title %>")
+    file.close
+    @snippet.content.should == @snippet.title
+    File.delete(file.path)
   end
 
   it 'should return its body if template not available' do
+    @snippet.body = 'BODY'
     mock_action_view = mock('mock_action_view')
     ActionView::Base.stub!(:new).and_return(mock_action_view)
-    mock_action_view.should_receive(:render).with({:file =>'shared/snippets/_rspec_is_great_for_testing_too.html.erb', :locals => {:snippet => @snippet}}).and_raise(ActionView::MissingTemplate.new([],nil,nil,nil))
-    @snippet.body = 'BODY'
+    mock_action_view.should_receive(:render).and_raise(ActionView::MissingTemplate.new([],nil,nil,nil))
     @snippet.content.should == 'BODY'
   end
 
