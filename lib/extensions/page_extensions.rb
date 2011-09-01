@@ -30,7 +30,8 @@ module Extensions
 
           content = ""
           content += part.snippets.before.map{|snippet| snippet.try(:body)}.join
-          content += part.try(:body)
+          part_body = part.try(:body)
+          content += part_body unless part_body.nil?
           content += part.snippets.after.map{|snippet| snippet.try(:body)}.join
         end
 

@@ -34,4 +34,10 @@ describe Page do
     page.snippets.should be_empty
   end
 
+  it "should work when body of part is nil or don't have snippets" do
+    @part.update_attributes(:body => nil)
+    @part.snippets.map(&:delete)
+    Proc.new {@page.content_for(:part)}.should_not raise_exception
+  end
+
 end
