@@ -7,7 +7,7 @@ module Extensions
 
         scope :for_snippet, lambda{ |snippet|
           raise RuntimeError.new("Couldn't find Pages for a nil Snippet") if snippet.blank?
-          joins(:parts, :snippets).where(snippets_page_parts => {:snippet_id => snippet.id})
+          joins(:parts => :snippets).where(:snippets_page_parts => {:snippet_id => snippet.id})
         }
 
         alias_method :content_without_snippets_for, :content_for
