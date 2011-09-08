@@ -19,14 +19,10 @@ module Refinery
           has_many :snippets, :through => :snippet_page_parts, :order => 'position ASC'
         end
         Page.send :include, Extensions::Page
+        PagesController.send :include, Extensions::PagesController
       end
 
       config.after_initialize do
-
-        # You need to include it here or will cause problemas with the
-        # inclusion of helpers :(
-        PagesController.send :include, Extensions::PagesController
-        
         ::Refinery::Pages::Tab.register do |tab|
           tab.name = "snippets"
           tab.partial = "/admin/pages/tabs/snippets"
