@@ -11,7 +11,7 @@ class Snippet < ActiveRecord::Base
   has_many :snippet_page_parts, :dependent => :destroy
   has_many :page_parts, :through => :snippet_page_parts
 
-  named_scope :for_page, lambda{ |page|
+  scope :for_page, lambda{ |page|
     raise RuntimeError.new("Couldn't find Snippet for a nil Page") if page.blank?
     joins(:page_parts => :page).where(:pages => {:id => page.id})
 
