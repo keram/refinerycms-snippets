@@ -25,11 +25,13 @@ module Extensions
               part.title.downcase.gsub(" ", "_") == part_title.to_s.downcase.gsub(" ", "_")
           end
 
-          content = ""
-          content += part.snippets.before.map{|snippet| snippet.try(:content)}.join
-          part_body = part.try(:body)
-          content += part.try(:body) unless part_body.nil?
-          content += part.snippets.after.map{|snippet| snippet.try(:content)}.join
+          if part
+            content = ""
+            content += part.snippets.before.map{|snippet| snippet.try(:content)}.join
+            part_body = part.try(:body)
+            content += part.try(:body) unless part_body.nil?
+            content += part.snippets.after.map{|snippet| snippet.try(:content)}.join
+          end
         end
 
         def snippets
