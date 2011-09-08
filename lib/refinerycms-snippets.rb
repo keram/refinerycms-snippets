@@ -6,6 +6,7 @@ module Refinery
 
       config.before_initialize do
         require 'extensions/page_extensions'
+        require 'extensions/pages_controller_extensions'
       end
 
       initializer "static assets" do |app|
@@ -21,6 +22,11 @@ module Refinery
       end
 
       config.after_initialize do
+
+        # You need to include it here or will cause problemas with the
+        # inclusion of helpers :(
+        PagesController.send :include, Extensions::PagesController
+        
         ::Refinery::Pages::Tab.register do |tab|
           tab.name = "snippets"
           tab.partial = "/admin/pages/tabs/snippets"

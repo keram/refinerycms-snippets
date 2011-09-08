@@ -13,8 +13,20 @@ describe Snippet do
     @snippet = Snippet.create!(@valid_attributes.update(options))
   end
 
+  def write_template(snippet = @snippet)
+    FileUtils.mkdir_p Snippet::TEMPLATES_DIR
+    @file = File.open("#{Snippet::TEMPLATES_DIR}/#{snippet.template_filename}", 'w')
+    @file.write("<%= snippet.title %>")
+    @file.close
+    return @file
+  end
+
   before(:each) do
     reset_snippet
+  end
+
+  after(:each) do
+    File.delete(@file.path) if @file
   end
 
   context "validations" do
@@ -43,6 +55,12 @@ describe Snippet do
     end
   end
 
+  it 'should verify if template for it exists' do
+    @snippet.template?.should be_false
+    write_template
+    @snippet.template?.should be_true
+  end
+
   it 'should sanitize its title for a filename' do
     @snippet.template_filename.should == '_rspec_is_great_for_testing_too.html.erb'
     @snippet.title = '/dir & folder/FooÑBar'
@@ -50,18 +68,12 @@ describe Snippet do
   end
 
   it 'should return its default template' do
-    file = File.open("#{RAILS_ROOT}/app/views/shared/snippets/#{@snippet.template_filename}", 'w')
-    file.write("<%= snippet.title %>")
-    file.close
-    @snippet.content.should == @snippet.title
-    File.delete(file.path)
+    write_template
+    @snippet.content.should == @snippet.template_filename
   end
 
   it 'should return its body if template not available' do
     @snippet.body = 'BODY'
-    mock_action_view = mock('mock_action_view')
-    ActionView::Base.stub!(:new).and_return(mock_action_view)
-    mock_action_view.should_receive(:render).and_raise(ActionView::MissingTemplate.new([],nil,nil,nil))
     @snippet.content.should == 'BODY'
   end
 
