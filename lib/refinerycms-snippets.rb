@@ -19,7 +19,7 @@ module Refinery
           has_many :snippets, :through => :snippet_page_parts, :order => 'position ASC'
         end
         Page.send :include, Extensions::Page
-        PagesController.send :include, Extensions::PagesController
+        #PagesController.send :include, Extensions::PagesController
       end
 
       config.after_initialize do
