@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Page do
+describe PagesHelper do
 
   before(:each) do
     @page = Page.create!(:title => 'Page title')
@@ -12,24 +12,14 @@ describe Page do
     @page.parts << @part
   end
 
-  it 'should return all snippets attached to its parts' do
-    page = Page.create!(:title => 'Other page')
-    part = PagePart.create!(:title => 'Other part', :body => "OTHER PART BODY")
-    snippet = Snippet.create!(:title => 'Other snippet', :body => "SNIPPET BODY")
-    part.snippets << snippet
-    @page.snippets.should have(2).snippets
-    @page.snippets.each do |s|
-      s.title.should_not == snippet.title
-    end
-    part.snippets.clear
-    part.save
-    page.snippets.should be_empty
+  it 'should give content for one part wrapped with its snippets' do
+    content_of(@page, :part).should == "BEFORE BODY<p>PART BODY</p>AFTER BODY"
   end
 
   it "should work when body of part is nil or don't have snippets" do
     @part.update_attributes(:body => nil)
     @part.snippets.map(&:delete)
-    Proc.new {@page.content_for(:part)}.should_not raise_exception
+    Proc.new {content_of(@page, :part)}.should_not raise_exception
   end
 
 end
