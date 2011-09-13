@@ -13,30 +13,6 @@ module Extensions
           }
         }
 
-        alias_method :content_without_snippets_for, :content_for
-        # Accessor method to get a page part from a page.
-        # Example:
-        #
-        #    Page.first.content_for(:body)
-        #
-        # Will return the body page part of the first page wrap with its
-        # attached snippets.
-        def content_for(part_title)
-          part = self.parts.detect do |part|
-            part.title.present? and #protecting against the problem that occurs when have nil title
-              part.title == part_title.to_s or
-              part.title.downcase.gsub(" ", "_") == part_title.to_s.downcase.gsub(" ", "_")
-          end
-
-          if part
-            content = ""
-            content += part.snippets.before.map{|snippet| snippet.try(:body)}.join
-            part_body = part.try(:body)
-            content += part_body unless part_body.nil?
-            content += part.snippets.after.map{|snippet| snippet.try(:body)}.join
-          end
-        end
-
         def snippets
           Snippet.for_page(self)
         end
