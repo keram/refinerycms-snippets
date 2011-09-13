@@ -67,14 +67,4 @@ describe Snippet do
     @snippet.template_filename.should == '_dir_folder_foo_bar.html.erb'
   end
 
-  it 'should return its default template' do
-    write_template
-    @snippet.content.should == @snippet.template_filename
-  end
-
-  it 'should return its body if template not available' do
-    @snippet.body = 'BODY'
-    @snippet.content.should == 'BODY'
-  end
-
 end

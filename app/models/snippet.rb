@@ -55,9 +55,4 @@ class Snippet < ActiveRecord::Base
     File.file? template_path
   end
 
-  def content
-    return template_filename if template?
-    self.body
-  end
-
 end

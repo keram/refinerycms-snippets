@@ -21,11 +21,15 @@ module Extensions
 
           if part
             content = ""
-            content += part.snippets.before.map{|snippet| snippet.try(:body)}.join
+            content += part.snippets.before.map{|snippet| content_or_render_of(snippet)}.join
             part_body = part.try(:body)
             content += part_body unless part_body.nil?
-            content += part.snippets.after.map{|snippet| snippet.try(:body)}.join
+            content += part.snippets.after.map{|snippet| content_or_render_of(snippet)}.join
           end
+        end
+
+        def content_or_render_of(snippet)
+          snippet.template? ? render(:file => snippet.template_path) : snippet.body
         end
 
       end

@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe PagesHelper do
 
+  def write_template(snippet = @snippet)
+    FileUtils.mkdir_p Snippet::TEMPLATES_DIR
+    @file = File.open("#{Snippet::TEMPLATES_DIR}/#{snippet.template_filename}", 'w')
+    @file.write("<%= snippet.title %>")
+    @file.close
+    return @file
+  end
+  
   before(:each) do
     @page = Page.create!(:title => 'Page title')
     @part = PagePart.create!(:title => 'Part', :body => "PART BODY")
@@ -12,8 +20,18 @@ describe PagesHelper do
     @page.parts << @part
   end
 
+  after(:each) do
+    File.delete(@file.path) if @file
+  end
+  
   it 'should give content for one part wrapped with its snippets' do
     content_of(@page, :part).should == "BEFORE BODY<p>PART BODY</p>AFTER BODY"
+  end
+
+  it 'should render snippets templates if present' do
+    write_template(@snippet_before)
+    should_receive(:render).with({:file => @snippet_before.template_path}).and_return('TEMPLATE')
+    content_of(@page, :part).should == "TEMPLATE<p>PART BODY</p>AFTER BODY"
   end
 
   it "should work when body of part is nil or don't have snippets" do
