@@ -39,7 +39,7 @@ Next run
 
 * Create Snippet on /refinery/snippets
 * Now you can attach snippet to page when you click Edit this page on `/refinery/pages`. In the Snippets tab you can select the part to which you want to attach the block and add it after and/or before the html body of the part.  
-* Next you can use @page.content_for(:part_name) to print the body of the part and the snippets attached to it.
+* Next you can use content_of(@page, :part) to print the body of the part and the snippets attached to it in the pages views.
 * You have some other interesting methods to work with snippets:
   * page.snippets: returns all the snippets attached to all the parts of page.
   * part.after: returns all the snippets attached after the html body of part.
