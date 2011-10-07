@@ -17,7 +17,7 @@ describe Snippet do
   end
 
   context "validations" do
-    
+
     it "rejects empty title" do
       Snippet.new(@valid_attributes.merge(:title => "")).should_not be_valid
     end
@@ -26,7 +26,20 @@ describe Snippet do
       # as one gets created before each spec by reset_snippet
       Snippet.new(@valid_attributes).should_not be_valid
     end
-    
+
+  end
+
+  it 'should return the page it is attached' do
+    @snippet.pages.should be_empty
+    page = Page.create!(:title => 'Page')
+    2.times do
+      part = PagePart.create!(:title => 'Other part', :body => "OTHER PART BODY", :page_id => Page.create!(:title => 'Other Page').id)
+      part.snippets << @snippet
+    end
+    @snippet.pages.should have(2).pages
+    @snippet.pages.each do |p|
+      p.title.should_not == page.title
+    end
   end
 
 end

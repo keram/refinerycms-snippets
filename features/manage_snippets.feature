@@ -21,7 +21,7 @@ Feature: Snippets
     And I follow "Add New Snippet"
     And I fill in "Title" with "This is a test of the first string field"
     And I press "Save"
-    Then I should see "'This is a test of the first string field' was successfully added."
+    Then I should see "This is a test of the first string field was successfully added."
     And I should have 1 snippet
 
   @snippets-invalid @invalid

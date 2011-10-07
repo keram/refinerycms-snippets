@@ -1,7 +1,14 @@
 <% if @page.new_record? %>
-<div class="msg alert"><%= t('.please_save_page_before') %></div>
+  <div class="msg alert"><%= t('.please_save_page_before') %></div>
 <% else %>
-<%= render :partial => '/admin/pages/tabs/snippets_field' %>
+  <div id="part-snippets-menu">
+    <ul>
+    <% @page.parts.each do |part|%>
+      <li><%= link_to(part.title, :anchor => "part-#{part.id}") %> |</li>
+    <% end %>
+    </ul>
+  </div>
+  <%= render :partial => '/admin/pages/tabs/snippets_field', :collection => @page.parts, :as => :part %>
 <% end %>
 
 <% content_for :stylesheets do %>
@@ -9,4 +16,7 @@
 <% end %>
 <% content_for :javascripts do %>
   <%= javascript_include_tag 'page-snippet-picker' %>
+<% end %>
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'part-snippets-select' %>
 <% end %>
