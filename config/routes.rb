@@ -6,7 +6,7 @@ Refinery::Application.routes.draw do
         post :update_positions
       end
       
-      resources :snippets_page do
+      resources :snippets_page_parts do
         member do
           get 'add'
           get 'remove'

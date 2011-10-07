@@ -23,9 +23,13 @@ en:
         snippets_field:
           active: Active
           inactive: Inactive
+          add_after_body: Add after body
+          add_before_body: Add before body
+          after_body: After body
+          before_body: Before body
+        snippets_list_item:
           remove: Remove
           edit: Edit
-          add: Add
   snippets:
     show:
       other: Other Snippets

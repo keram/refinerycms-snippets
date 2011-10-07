@@ -34,7 +34,7 @@ $(document).ready(function (cms) {
 			
 			if (!this.processing) {
 				this.spinner_on();
-
+                          var partId = $('#part-snippets-select').val();
 				$.ajax({
 					url: add_url,
 					type: 'GET',
@@ -45,6 +45,8 @@ $(document).ready(function (cms) {
 					},
 					success: function (response) {
 						that.update(response);
+                                          cms.plugin.PartSnippetsSelect.init();
+                                          $('#part-snippets-select').val(partId).change();
 					}
 				});
 			}
@@ -56,7 +58,7 @@ $(document).ready(function (cms) {
 
 			if (!this.processing) {
 				this.spinner_on();
-				
+			        var partId = $('#part-snippets-select').val();
 				// console.log('remove start');
 				$.ajax({
 					url: remove_url,
@@ -69,6 +71,8 @@ $(document).ready(function (cms) {
 					},
 					success: function (response) {
 						that.update(response);
+                                          cms.plugin.PartSnippetsSelect.init();
+                                          $('#part-snippets-select').val(partId).change();
 					}
 				});
 			}

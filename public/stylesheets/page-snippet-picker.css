@@ -6,25 +6,32 @@
         Styles for snippets administrations
 */
 
-a.add-snippet {
+a.add-snippet,
+span.add-snippet {
 	background-repeat: no-repeat;
 	background-position: left center;
 	border: none; 
 	padding-left: 20px;
 }
 
-#page_snippet_picker ul {
+span.add-snippet {
+   float: right;
+   color: lightGray;
+   margin: 3px;
+}
+
+.part-snippets ul {
 	background: #fff;
 	padding: 10px;
 	padding-bottom: 0px;
 	margin-bottom: 5px;
 }
 
-#active-snippets ul {
+.active-snippets ul {
 	margin-bottom: 15px;
 }
 
-#inactive-snippets ul {
+.inactive-snippets ul {
 	background: #fcfcfc;
 }
 
@@ -36,4 +43,28 @@ a.add-snippet {
 .msg.alert {
 	color: #f66;
 	background: #fff;
+}
+
+#page_snippet_picker h1 {
+   text-align: left;
+}
+
+.part-snippets {
+   margin-bottom: 5ex;
+}
+
+.part-snippets:last-child {
+   margin-bottom: 0;
+}
+
+#page_snippet_picker div.actions {
+   display: inline;
+}
+
+#part-snippets-menu {
+   margin: 1ex;
+}
+
+#part-snippets-menu li {
+   display: inline;
 }
