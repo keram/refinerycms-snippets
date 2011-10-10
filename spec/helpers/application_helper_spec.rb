@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PagesHelper do
+describe ApplicationHelper do
 
   def write_template(snippet = @snippet)
     FileUtils.mkdir_p Snippet::TEMPLATES_DIR
