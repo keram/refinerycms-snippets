@@ -1,5 +1,5 @@
 module Extensions
-  module PagesHelper
+  module ApplicationHelper
 
     def self.included(base)
       base.class_eval do
