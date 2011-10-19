@@ -4,7 +4,7 @@
 <aside id='actions'>
   <%= render :partial => 'actions' %>
 </aside>
-<%= render :partial => '/shared/admin/make_sortable',
+<%= render :partial => '/refinery/admin/make_sortable',
             :locals => {
               :tree => false
-            } if !searching? and Admin::SnippetsController.sortable? and Snippet.count > 1 %>
+            } if !searching? and Refinery::Admin::SnippetsController.sortable? and Refinery::Snippet.count > 1 %>

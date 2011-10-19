@@ -1,11 +1,10 @@
-Refinery::Application.routes.draw do
-
-  scope(:path => 'refinery', :as => 'admin', :module => 'admin') do
+::Refinery::Application.routes.draw do  
+  scope(:path => 'refinery', :as => 'refinery_admin', :module => 'refinery/admin') do
     resources :snippets do
       collection do
         post :update_positions
       end
-      
+
       resources :snippets_page_parts do
         member do
           get 'add'
@@ -13,7 +12,6 @@ Refinery::Application.routes.draw do
         end
       end
     end
-    
+
   end
-  
 end

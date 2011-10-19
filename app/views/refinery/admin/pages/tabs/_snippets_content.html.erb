@@ -3,12 +3,14 @@
 <% else %>
   <div id="part-snippets-menu">
     <ul>
-    <% @page.parts.each do |part|%>
-      <li><%= link_to(part.title, :anchor => "part-#{part.id}") %> |</li>
-    <% end %>
+      <% @page.parts.each do |part|%>
+        <li>
+          <%= link_to(part.title, main_app.url_for(:anchor => "part-#{part.id}")) %> |
+        </li>
+      <% end %>
     </ul>
   </div>
-  <%= render :partial => '/admin/pages/tabs/snippets_field', :collection => @page.parts, :as => :part %>
+  <%= render :partial => '/refinery/admin/pages/tabs/snippets_field', :collection => @page.parts, :as => :part %>
 <% end %>
 
 <% content_for :stylesheets do %>

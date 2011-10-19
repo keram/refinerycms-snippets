@@ -5,7 +5,7 @@ module Extensions
 
       base.class_eval do
 
-        named_scope :for_snippet, lambda{ |snippet|
+        scope :for_snippet, lambda{ |snippet|
           raise RuntimeError.new("Couldn't find Pages for a nil Snippet") if snippet.blank?
           {
             :joins => {:parts, :snippets},
@@ -14,7 +14,7 @@ module Extensions
         }
 
         def snippets
-          Snippet.for_page(self)
+          Refinery::Snippet.for_page(self)
         end
 
       end
