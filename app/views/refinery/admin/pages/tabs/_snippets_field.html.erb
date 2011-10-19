@@ -25,14 +25,14 @@
             <span class="title"><%= snippet.title %></span>
             <div class="actions">
               <% unless snippet.after?(part) %>
-                <%= link_to t('.add_after_body'), main_app.url_for({:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}), :class => 'add-snippet' %>
+                <%= link_to t('.add_after_body'), main_app.url_for({:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}), :class => 'add_icon add-snippet' %>
               <% else %>
-                <span class="add_icon add-snippet"><%= t('.add_after_body') %></span>
+                <span class="add-snippet"><%= t('.add_after_body') %></span>
               <% end %>
               <% unless snippet.before?(part) %>
-                <%= link_to t('.add_before_body'), main_app.url_for({:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => 'true'}), :class => 'add-snippet' %>
+                <%= link_to t('.add_before_body'), main_app.url_for({:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => 'true'}), :class => 'add_icon add-snippet' %>
               <% else %>
-                <span class="add_icon add-snippet"><%= t('.add_before_body') %></span>
+                <span class=" add-snippet"><%= t('.add_before_body') %></span>
               <% end %>
             </div>
           </li>
