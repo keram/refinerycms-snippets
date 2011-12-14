@@ -6,7 +6,7 @@ Snippets allows you to relate one or more html blocks to any page in Refinery. T
 
 ## Requirements
 
-* RefineryCMS with 'Pages' engine (refinerycms-pages >= 0.9.9.1)
+* RefineryCMS with 'Pages' engine (refinerycms-pages >= 2.0.0)
 
 ## TODO
 
@@ -27,12 +27,12 @@ Snippets allows you to relate one or more html blocks to any page in Refinery. T
 
 Add this line to your applications `Gemfile`
 
-    gem 'refinerycms-snippets', '~> 0.4.1'
+    gem 'refinerycms-snippets', '~> 2.0.0'
 
 Next run
 
     bundle install
-    rails g refinerycms_snippets
+    rails g refinerycms:snippets
     rake db:migrate
 
 ## Usage
