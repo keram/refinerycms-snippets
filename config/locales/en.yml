@@ -1,7 +1,7 @@
 en:
   refinery:
     plugins:
-      snippets:
+      refinerycms_snippets:
         title: Snippets
     admin:
       snippets:
