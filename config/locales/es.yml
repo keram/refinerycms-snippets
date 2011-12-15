@@ -37,9 +37,8 @@ es:
   activerecord:
     models:
       refinery/snippet: snippet
+      refinery/snippet_page_part: Asociación de snippet
     attributes:
       refinery/snippet:
         title: Título
-  activerecord:
-    models:
-      refinery/snippet_page_part: Asociación de snippet
+
