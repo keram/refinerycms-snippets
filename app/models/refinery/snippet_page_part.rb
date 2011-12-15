@@ -3,6 +3,8 @@ module Refinery
 
     set_table_name 'snippets_page_parts'
 
+    delegate :title, :to => :snippet
+
     belongs_to :snippet, :foreign_key => :snippet_id
     belongs_to :page_part, :foreign_key => :page_part_id
 

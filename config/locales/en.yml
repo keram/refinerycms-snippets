@@ -1,7 +1,7 @@
 en:
   refinery:
     plugins:
-      snippets:
+      refinery_snippets:
         title: Snippets
     admin:
       snippets:
@@ -34,3 +34,11 @@ en:
     snippets:
       show:
         other: Other Snippets
+  activerecord:
+    models:
+      refinery/snippet: snippet
+      refinery/snippet_page_part: Snippet association
+    attributes:
+      refinery/snippet:
+        title: Title
+
