@@ -34,3 +34,9 @@ es:
     snippets:
       show:
         other: Otros Snippets
+  activerecord:
+    models:
+      refinery/snippet: snippet
+    attributes:
+      refinery/snippet:
+        title: Título
