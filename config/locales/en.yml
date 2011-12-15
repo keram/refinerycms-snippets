@@ -40,3 +40,6 @@ en:
     attributes:
       refinery/snippet:
         title: Title
+  activerecord:
+    models:
+      refinery/snippet_page_part: Snippet association

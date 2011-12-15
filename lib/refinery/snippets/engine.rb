@@ -13,17 +13,20 @@ module Refinery
         require 'extensions/pages_helper_extensions'
       end
 
-      initializer "register refinerycms_snippets plugin", :after => :set_routes_reloader do |app|
+      initializer "register refinery_snippets plugin", :after => :set_routes_reloader do |app|
 
         Refinery::Plugin.register do |plugin|
           plugin.pathname = root
-          plugin.name = "refinerycms_snippets"
+          plugin.name = "refinery_snippets"
           plugin.url = app.routes.url_helpers.refinery_admin_snippets_path
           plugin.menu_match = /^\/?(admin|refinery)\/snippets/
           plugin.activity = [{
-                               :class_name => Refinery::Snippet
+                               :class_name => :'refinery/snippet',
+                               :url => "refinery_admin_snippet_path"
                              }, {
-                               :class_name => Refinery::SnippetPagePart
+                               :class_name => :'refinery/snippet_page_part',
+                               :nested_with => ['snippet'],
+                               :url => "refinery_admin_snippet_snippets_page_part_path"
                              }]
         end
       end

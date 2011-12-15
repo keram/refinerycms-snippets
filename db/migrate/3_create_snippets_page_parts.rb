@@ -7,6 +7,7 @@ class CreateSnippetsPageParts < ActiveRecord::Migration
         t.integer :page_part_id, :null => false, :references => [:page_parts, :id]
         t.integer :position, :null => false, :default => 0
         t.boolean :before_body, :null => false, :default => false
+        t.timestamps
       end
     end
 
