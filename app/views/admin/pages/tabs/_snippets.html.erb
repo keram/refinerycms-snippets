@@ -1,3 +1,4 @@
+<% user_can_modify_snippets = ::Refinery::Plugins.active.names.include?("snippets") %>
 <div class="wym_skin_refinery page_part" id="page_snippet_picker">
-  <%= render :partial => '/admin/pages/tabs/snippets_content', :locals => {:f => f} %>
+  <%= render :partial => '/admin/pages/tabs/snippets_content', :locals => {:f => f, :user_can_modify_snippets => user_can_modify_snippets} %>
 </div>
