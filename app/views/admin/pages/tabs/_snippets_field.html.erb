@@ -4,42 +4,43 @@
     <% if part.snippets.before.any? %>
       <h2><%= t('.before_body') %></h2>
       <ul>
-        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.before, :as => :snippet, :locals => {:part => part, :before_body => true} %>
+        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.before, :as => :snippet, :locals => {:part => part, :before_body => true, :user_can_modify_snippets => user_can_modify_snippets} %>
       </ul>
     <% end %>
     <% if part.snippets.after.any? %>
       <h2><%= t('.after_body') %></h2>
       <ul>
-        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.after, :as => :snippet, :locals => {:part => part, :before_body => false} %>
+        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.after, :as => :snippet, :locals => {:part => part, :before_body => false, :user_can_modify_snippets => user_can_modify_snippets} %>
       </ul>
     <% end %>
   </div>
-
-  <div class="inactive-snippets">
-    <% inactive_snippets = Snippet.all %>
-    <% if inactive_snippets.length > 0 %>
-      <h2><%= t('.inactive') %></h2>
-      <ul>
-        <% inactive_snippets.each do |snippet| %>
-          <li class='clearfix record <%= cycle('on', 'on-hover') %>' >
-            <span class="title"><%= snippet.title %></span>
-            <div class="actions">
-              <% unless snippet.after?(part) %>
-                <%= link_to t('.add_after_body'), {:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}, :class => 'add_icon add-snippet' %>
-              <% else %>
-                <span class="add_icon add-snippet"><%= t('.add_after_body') %></span>
-              <% end %>
-              <% unless snippet.before?(part) %>
-                <%= link_to t('.add_before_body'), {:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => 'true'}, :class => 'add_icon add-snippet' %>
-              <% else %>
-                <span class="add_icon add-snippet"><%= t('.add_before_body') %></span>
-              <% end %>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
+  <% if user_can_modify_snippets %>
+    <div class="inactive-snippets">
+      <% inactive_snippets = Snippet.all %>
+      <% if inactive_snippets.length > 0 %>
+        <h2><%= t('.inactive') %></h2>
+        <ul>
+          <% inactive_snippets.each do |snippet| %>
+            <li class='clearfix record <%= cycle('on', 'on-hover') %>' >
+              <span class="title"><%= snippet.title %></span>
+              <div class="actions">
+                <% unless snippet.after?(part) %>
+                  <%= link_to t('.add_after_body'), {:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}, :class => 'add_icon add-snippet' %>
+                <% else %>
+                  <span class="add_icon add-snippet"><%= t('.add_after_body') %></span>
+                <% end %>
+                <% unless snippet.before?(part) %>
+                  <%= link_to t('.add_before_body'), {:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => 'true'}, :class => 'add_icon add-snippet' %>
+                <% else %>
+                  <span class="add_icon add-snippet"><%= t('.add_before_body') %></span>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 
