@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe Snippet do
@@ -12,8 +13,20 @@ describe Snippet do
     @snippet = Snippet.create!(@valid_attributes.update(options))
   end
 
+  def write_template(snippet = @snippet)
+    FileUtils.mkdir_p Snippet::TEMPLATES_DIR
+    @file = File.open("#{Snippet::TEMPLATES_DIR}/#{snippet.template_filename}", 'w')
+    @file.write("<%= snippet.title %>")
+    @file.close
+    return @file
+  end
+
   before(:each) do
     reset_snippet
+  end
+
+  after(:each) do
+    File.delete(@file.path) if @file
   end
 
   context "validations" do
@@ -29,7 +42,7 @@ describe Snippet do
 
   end
 
-  it 'should return the page it is attached' do
+  it 'should return the page it is attached to' do
     @snippet.pages.should be_empty
     page = Page.create!(:title => 'Page')
     2.times do
@@ -40,6 +53,18 @@ describe Snippet do
     @snippet.pages.each do |p|
       p.title.should_not == page.title
     end
+  end
+
+  it 'should verify if template for it exists' do
+    @snippet.template?.should be_false
+    write_template
+    @snippet.template?.should be_true
+  end
+
+  it 'should sanitize its title for a filename' do
+    @snippet.template_filename.should == '_rspec_is_great_for_testing_too.html.erb'
+    @snippet.title = '/dir & folder/FooÑBar'
+    @snippet.template_filename.should == '_dir_folder_foo_bar.html.erb'
   end
 
 end
