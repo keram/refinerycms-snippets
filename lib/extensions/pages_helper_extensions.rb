@@ -15,16 +15,34 @@ module Extensions
         def content_of(page, part_title)
           part = page.parts.detect do |part|
             part.title.present? and #protecting against the problem that occurs when have nil title
-              part.title == part_title.to_s or
-              part.title.downcase.gsub(" ", "_") == part_title.to_s.downcase.gsub(" ", "_")
+            title(part.title) == part_title
           end
 
           if part
             content = ""
-            content += part.snippets.before.map{|snippet| snippet.try(:body)}.join
+            content += part.snippets.before.map{|snippet| render_snippet(snippet)}.join
             part_body = part.try(:body)
             content += part_body unless part_body.nil?
-            content += part.snippets.after.map{|snippet| snippet.try(:body)}.join
+            content += part.snippets.after.map{|snippet| render_snippet(snippet)}.join
+          end
+        end
+
+        private
+
+        def title(title)
+          case (title_symbol = title.to_s.gsub(/\ /, '').underscore.to_sym)
+            when :body then :body_content_left
+            when :side_body then :body_content_right
+            else title_symbol
+          end
+        end
+
+        def render_snippet(snippet)
+          title_slug = snippet.title.to_s.gsub(/\s/, "_").gsub(/[^-\w]/, "").downcase
+          begin
+            render :partial => "snippets/#{title_slug}"
+          rescue ActionView::MissingTemplate
+            snippet.try(:body)
           end
         end
 

@@ -22,4 +22,24 @@ describe PagesHelper do
     Proc.new {content_of(@page, :part)}.should_not raise_exception
   end
 
+  it "should return template if snippet template exists" do
+    should_receive(:render).with("shared/before_title").and_return('TEMPLATE')
+    render_snippet(@snippet_before).should == 'TEMPLATE'
+  end
+
+  it "should return body if snippet template doesn't exist" do
+    should_receive(:render).with("shared/before_title").and_raise(ActionView::MissingTemplate)
+    render_snippet(@snippet_before).should == 'BEFORE BODY'
+  end
+
+  it "should return nil if snippet body and template don't exist" do
+    @before_snippet.update_attribute(:body, nil)
+    should_receive(:render).with("shared/before_title").and_raise(ActionView::MissingTemplate)
+    render_snippet(@snippet_before).should be_nil
+  end
+
+  it 'should return title' do
+    title(@part.title).should == :part
+  end
+
 end
