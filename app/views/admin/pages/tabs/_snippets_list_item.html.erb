@@ -10,7 +10,7 @@
       </span>
     <% end %>
   </span>
-  <% if user_can_modify_snippets %>
+  <% if ::Refinery::Plugins.active.names.include?("snippets") %>
     <span class='actions'>
       <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_snippet_path(snippet),
           :title => t('.edit') %>

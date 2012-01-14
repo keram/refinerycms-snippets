@@ -8,7 +8,7 @@
     <% end %>
     </ul>
   </div>
-  <%= render :partial => '/admin/pages/tabs/snippets_field', :collection => @page.parts, :as => :part, :locals => {:user_can_modify_snippets => user_can_modify_snippets} %>
+  <%= render :partial => '/admin/pages/tabs/snippets_field', :collection => @page.parts, :as => :part %>
 <% end %>
 
 <% content_for :stylesheets do %>

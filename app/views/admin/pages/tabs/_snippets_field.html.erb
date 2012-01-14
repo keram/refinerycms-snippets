@@ -4,17 +4,17 @@
     <% if part.snippets.before.any? %>
       <h2><%= t('.before_body') %></h2>
       <ul>
-        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.before, :as => :snippet, :locals => {:part => part, :before_body => true, :user_can_modify_snippets => user_can_modify_snippets} %>
+        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.before, :as => :snippet, :locals => {:part => part, :before_body => true} %>
       </ul>
     <% end %>
     <% if part.snippets.after.any? %>
       <h2><%= t('.after_body') %></h2>
       <ul>
-        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.after, :as => :snippet, :locals => {:part => part, :before_body => false, :user_can_modify_snippets => user_can_modify_snippets} %>
+        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.after, :as => :snippet, :locals => {:part => part, :before_body => false} %>
       </ul>
     <% end %>
   </div>
-  <% if user_can_modify_snippets %>
+  <% if ::Refinery::Plugins.active.names.include?("snippets") %> %>
     <div class="inactive-snippets">
       <% inactive_snippets = Snippet.all %>
       <% if inactive_snippets.length > 0 %>
