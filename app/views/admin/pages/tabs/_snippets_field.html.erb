@@ -14,7 +14,7 @@
       </ul>
     <% end %>
   </div>
-  <% if ::Refinery::Plugins.active.names.include?("snippets") %> %>
+  <% if ::Refinery::Plugins.active.names.include?("snippets") %>
     <div class="inactive-snippets">
       <% inactive_snippets = Snippet.all %>
       <% if inactive_snippets.length > 0 %>
