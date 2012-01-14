@@ -9,15 +9,15 @@ class Snippet < ActiveRecord::Base
   has_many :snippet_page_parts, :dependent => :destroy
   has_many :page_parts, :through => :snippet_page_parts
 
-  named_scope :for_page, lambda{ |page|
+  scope :for_page, lambda{ |page|
     raise RuntimeError.new("Couldn't find Snippet for a nil Page") if page.blank?
     joins(:page_parts => :page).where(:pages => {:id => page.id})
 
   }
 
   scope :before, where(:snippets_page_parts => {:before_body => true})
-  scope :after, where(:snippets_page_parts => {:before_body => false}) 
-  
+  scope :after, where(:snippets_page_parts => {:before_body => false})
+
   # rejects any page that has not been translated to the current locale.
   scope :translated, lambda {
     pages = Arel::Table.new(Snippet.table_name)
