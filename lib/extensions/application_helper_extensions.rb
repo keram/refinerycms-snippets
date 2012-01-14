@@ -1,5 +1,5 @@
 module Extensions
-  module PagesHelper
+  module ApplicationHelper
 
     def self.included(base)
       base.class_eval do
@@ -12,7 +12,7 @@ module Extensions
         #
         # Will return the body page part of the first page wrap with its
         # attached snippets.
-        def content_of(page, part_title)
+        def content_of(page, part_title, yield_body=nil)
           part = page.parts.detect do |part|
             part.title.present? and #protecting against the problem that occurs when have nil title
             title(part.title) == part_title
@@ -21,8 +21,8 @@ module Extensions
           if part
             content = ""
             content += part.snippets.before.map{|snippet| render_snippet(snippet)}.join
-            part_body = part.try(:body)
-            content += part_body unless part_body.nil?
+            content += part.body if part.try(:body).present?
+            content += yield_body if yield_body.present?
             content += part.snippets.after.map{|snippet| render_snippet(snippet)}.join
           end
         end
