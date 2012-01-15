@@ -21,7 +21,7 @@ module Extensions
           if part
             content = ""
             content += part.snippets.before.map{|snippet| render_snippet(snippet)}.join
-            content += part.body if part.try(:body).present?
+            content += part.body if part.body.present? and !yield_body.present?
             content += yield_body if yield_body.present?
             content += part.snippets.after.map{|snippet| render_snippet(snippet)}.join
           end
