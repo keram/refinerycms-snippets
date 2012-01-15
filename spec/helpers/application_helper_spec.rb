@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApplcationHelper do
+describe ApplicationHelper do
 
   before(:each) do
     @page = Page.create!(:title => 'Page title')
