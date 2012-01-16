@@ -12,8 +12,7 @@ module Refinery
 
     scope :for_page, lambda{ |page|
       raise RuntimeError.new("Couldn't find Snippet for a nil Page") if page.blank?
-      joins(:page_parts => :page).where(:pages => {:id => page.id})
-
+      joins(:page_parts => :page).where(:refinery_pages => {:id => page.id})
     }
 
     scope :before, where(:snippets_page_parts => {:before_body => true})
