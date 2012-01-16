@@ -10,11 +10,13 @@
       </span>
     <% end %>
   </span>
-  <span class='actions'>
-    <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_snippet_path(snippet),
-        :title => t('.edit') %>
-    <%= link_to refinery_icon_tag('delete.png'), url_for({:controller => 'snippets_page_parts', :action => 'remove', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => before_body}),
-        :title => t('.remove'),
-        :class => 'remove-snippet' %>
-  </span>
+  <% if ::Refinery::Plugins.active.names.include?("snippets") %>
+    <span class='actions'>
+      <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_snippet_path(snippet),
+          :title => t('.edit') %>
+      <%= link_to refinery_icon_tag('delete.png'), url_for({:controller => 'snippets_page_parts', :action => 'remove', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => before_body}),
+          :title => t('.remove'),
+          :class => 'remove-snippet' %>
+    </span>
+  <% end %>
 </li>
