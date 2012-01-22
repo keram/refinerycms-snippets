@@ -2,7 +2,7 @@
   <span class='title'>
     <%= snippet.title %>
     <% if defined?(::Refinery::I18n) and ::Refinery::I18n.frontend_locales.many? and
-           (locales = snippet.translations.collect{|t| t.locale}).present? %>
+        (locales = snippet.translations.collect{|t| t.locale}).present? %>
       <span class='preview'>
         <% locales.each do |locale| %>
           <%= refinery_icon_tag "flags/#{locale}.png", :size => '16x11' %>
@@ -12,9 +12,9 @@
   </span>
   <span class='actions'>
     <%= link_to refinery_icon_tag('application_edit.png'), edit_admin_snippet_path(snippet),
-        :title => t('.edit') %>
+      :title => t('.edit') %>
     <%= link_to refinery_icon_tag('delete.png'), url_for({:controller => 'snippets_page_parts', :action => 'remove', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => before_body}),
-        :title => t('.remove'),
-        :class => 'remove-snippet' %>
+      :title => t('.remove'),
+      :class => 'remove-snippet' %>
   </span>
 </li>
