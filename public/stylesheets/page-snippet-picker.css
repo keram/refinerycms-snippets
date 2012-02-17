@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : page-snippet-picker.css
     Created on : May 16, 2011, 4:41:03 AM
     Author     : keram
@@ -8,63 +8,75 @@
 
 a.add-snippet,
 span.add-snippet {
-	background-repeat: no-repeat;
-	background-position: left center;
-	border: none; 
-	padding-left: 20px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    border: none;
+    padding-left: 20px;
 }
 
 span.add-snippet {
-   float: right;
-   color: lightGray;
-   margin: 3px;
+    float: right;
+    color: lightGray;
+    margin: 3px;
 }
 
 .part-snippets ul {
-	background: #fff;
-	padding: 10px;
-	padding-bottom: 0px;
-	margin-bottom: 5px;
+    background: #fff;
+    padding: 10px;
+    padding-bottom: 0px;
+    margin-bottom: 5px;
 }
 
 .active-snippets ul {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .inactive-snippets ul {
-	background: #fcfcfc;
+    background: #fcfcfc;
 }
 
 .msg {
-	margin: 5px 5px 10px;
-	padding: 20px;
+    margin: 5px 5px 10px;
+    padding: 20px;
 }
 
 .msg.alert {
-	color: #f66;
-	background: #fff;
-}
-
-#page_snippet_picker h1 {
-   text-align: left;
+    color: #f66;
+    background: #fff;
 }
 
 .part-snippets {
-   margin-bottom: 5ex;
+    margin-bottom: 5ex;
 }
 
 .part-snippets:last-child {
-   margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 #page_snippet_picker div.actions {
-   display: inline;
+    display: inline;
 }
 
-#part-snippets-menu {
-   margin: 1ex;
+#page_snippet_picker span.title {
+    line-height: 30px;
+}
+
+#part-snippets-menu, .part-snippets {
+    margin: 1ex;
 }
 
 #part-snippets-menu li {
-   display: inline;
+    display: inline;
+}
+
+#part-snippets-select {
+    font-weight: bold;
+    width: 21%;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.part-snippets .block {
+    border-top: solid 1px #99998B;
+    padding-top: 1ex;
 }
