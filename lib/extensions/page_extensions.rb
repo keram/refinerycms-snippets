@@ -5,10 +5,12 @@ module Extensions
 
       base.class_eval do
 
+        has_many :snippet_page_parts, :through => :parts
+        
         named_scope :for_snippet, lambda{ |snippet|
           raise RuntimeError.new("Couldn't find Pages for a nil Snippet") if snippet.blank?
           {
-            :joins => [:snippets_page_parts, :snippets],
+            :joins => [:snippet_page_parts],
             :conditions => {:snippets_page_parts => {:snippet_id => snippet.id}}
           }
         }
