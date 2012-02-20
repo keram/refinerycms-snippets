@@ -5,7 +5,7 @@ class RemovePositionFromSnippets < ActiveRecord::Migration
   end
 
   def self.down
-    add_column(:snippets, :posicion, :integer,
+    add_column(:snippets, :position, :integer,
                :null => :false, :default => 0)
   end
 
