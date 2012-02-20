@@ -1,24 +1,22 @@
 <div id="<%= "part-#{part.id}" %>" class="part-snippets">
-  <h1><%= part.title %></h1>
-  <div class="active-snippets">
+  <div class="active-snippets block">
     <% if part.snippets.before.any? %>
-      <h2><%= t('.before_body') %></h2>
+      <h3><%= t('.before_body') %></h3>
       <ul>
         <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.before, :as => :snippet, :locals => {:part => part, :before_body => true} %>
       </ul>
     <% end %>
     <% if part.snippets.after.any? %>
-      <h2><%= t('.after_body') %></h2>
+      <h3><%= t('.after_body') %></h3>
       <ul>
         <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.after, :as => :snippet, :locals => {:part => part, :before_body => false} %>
       </ul>
     <% end %>
   </div>
-
-  <div class="inactive-snippets">
+  <div class="inactive-snippets block">
     <% inactive_snippets = Snippet.all %>
     <% if inactive_snippets.length > 0 %>
-      <h2><%= t('.inactive') %></h2>
+      <h3><%= t('.inactive') %></h3>
       <ul>
         <% inactive_snippets.each do |snippet| %>
           <li class='clearfix record <%= cycle('on', 'on-hover') %>' >
