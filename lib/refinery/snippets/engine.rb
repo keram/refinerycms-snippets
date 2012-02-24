@@ -18,15 +18,15 @@ module Refinery
         Refinery::Plugin.register do |plugin|
           plugin.pathname = root
           plugin.name = "refinery_snippets"
-          plugin.url = app.routes.url_helpers.refinery_admin_snippets_path
+          plugin.url = {:controller => '/refinery/admin/snippets'}
           plugin.menu_match = /^\/?(admin|refinery)\/snippets/
           plugin.activity = [{
                                :class_name => :'refinery/snippet',
-                               :url => "refinery_admin_snippet_path"
+                               :url => "refinery.admin_snippet_path"
                              }, {
                                :class_name => :'refinery/snippet_page_part',
                                :nested_with => ['snippet'],
-                               :url => "refinery_admin_snippet_snippets_page_part_path"
+                               :url => "refinery.admin_snippet_snippets_page_part_path"
                              }]
         end
       end
