@@ -1,0 +1,35 @@
+<%= form_for [main_app, :refinery_admin, @snippet] do |f| -%>
+  <%= render :partial => "/refinery/admin/error_messages", :locals => {
+          :object => @snippet,
+          :include_object_name => true
+        } %>
+  
+  <%= render :partial => "locale_picker",
+             :locals => {
+               :current_locale => Thread.current[:globalize_locale]
+             } if defined?(::Refinery::I18n) %>
+  
+  <div class='field'>
+    <%= f.label :title -%>
+    <%= f.text_field :title, :class => 'larger widest' -%>
+  </div>
+  <br />
+  <div class='field'>
+    <div class='clearfix ui-tabs ui-widget ui-widget-content ui-corner-all'>
+      <div>
+        <% [:body].each do |part| %>
+          <div>
+            <%= f.text_area part, :rows => 20, :class => 'wymeditor widest' -%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  <%= render :partial => '/refinery/admin/form_actions',
+              :locals => {
+                :f => f,
+                :continue_editing => true,
+                :delete_title => t('delete', :scope => 'refinery.admin.snippets.snippet'),
+                :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @snippet.title)
+              } %>
+<% end -%>
