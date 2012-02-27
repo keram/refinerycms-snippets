@@ -1,7 +1,7 @@
 module Refinery
   class SnippetPagePart < ActiveRecord::Base
 
-    set_table_name 'snippets_page_parts'
+    self.table_name = 'snippets_page_parts'
 
     delegate :title, :to => :snippet
 
