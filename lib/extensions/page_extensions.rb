@@ -7,9 +7,7 @@ module Extensions
 
         scope :for_snippet, lambda{ |snippet|
           raise RuntimeError.new("Couldn't find Pages for a nil Snippet") if snippet.blank?
-          joins(:parts => :snippets)
-          .select('distinct(refinery_pages.id)')
-          .where(:snippets_page_parts => {:snippet_id => snippet.id})
+          joins(:parts => :snippets).where(:snippets_page_parts => {:snippet_id => snippet.id})
         }
 
         def snippets

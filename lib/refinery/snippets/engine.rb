@@ -10,7 +10,7 @@ module Refinery
 
       config.before_initialize do
         require 'extensions/page_extensions'
-        require 'extensions/pages_helper_extensions'
+        require 'extensions/application_helper_extensions'
       end
 
       initializer "register refinery_snippets plugin", :after => :set_routes_reloader do |app|
@@ -37,7 +37,7 @@ module Refinery
           has_many :snippets, :through => :snippet_page_parts, :order => 'position ASC'
         end
         Refinery::Page.send :include, Extensions::Page
-        Refinery::PagesHelper.send :include, Extensions::PagesHelper
+        ApplicationHelper.send :include, Extensions::ApplicationHelper
       end
       
       config.after_initialize do
