@@ -3,23 +3,23 @@
     <li>
       <%= render :partial => "/refinery/admin/search",
                   :locals => {
-                    :url => main_app.refinery_admin_snippets_path
+                    :url => refinery.admin_snippets_path
                   } %>
     </li>
   <% end %>
   <li>
-    <%= link_to t('.create_new'), main_app.new_refinery_admin_snippet_path,
+    <%= link_to t('.create_new'), refinery.new_admin_snippet_path,
                  :class => "add_icon" %>
   </li>
 <% if !searching? and Refinery::Admin::SnippetsController.sortable? and Refinery::Snippet.count > 1 %>
   <li>
     <%= link_to t('.reorder', :what => "Snippets"),
-                 main_app.refinery_admin_snippets_path,
+                 refinery.update_positions_admin_snippets_path,
                  :id => "reorder_action",
                  :class => "reorder_icon" %>
 
     <%= link_to t('.reorder_done', :what => "Snippets"),
-                 main_app.refinery_admin_snippets_path,
+                 refinery.update_positions_admin_snippets_path,
                  :id => "reorder_action_done",
                  :style => "display: none;",
                  :class => "reorder_icon" %>
