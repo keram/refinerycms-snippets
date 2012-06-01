@@ -15,13 +15,13 @@ Snippets allows you to relate one or more html blocks to any page in Refinery. T
 * Save and Continue button -- done
 * Attaching snippet to page part directly through administration, without overriding view template -- done
 * Documentation
-* Tests 
+* Tests
 
 ### to 2.0
 * custom attributes for snippet (id, classes etc)
 * support for dynamic snippets (erb templates, forms etc)
-* improve UI 
-* inheritance and clone 
+* improve UI
+* inheritance and clone
 
 ## Install
 
@@ -38,8 +38,9 @@ Next run
 ## Usage
 
 * Create Snippet on /refinery/snippets
-* Now you can attach snippet to page when you click Edit this page on `/refinery/pages`. In the Snippets tab you can select the part to which you want to attach the block and add it after and/or before the html body of the part.  
-* Next you can use content_of(@page, :part) to print the body of the part and the snippets attached to it in the pages views.
+* Now you can attach snippet to page when you click Edit this page on `/refinery/pages`. In the Snippets tab you can select the part to which you want to attach the block and add it after and/or before the html body of the part.
+* Next you can use content_of(@page, :part) or to print the body of the part and the snippets attached to it in the pages views.
+* You can also use content_of(@page, :part, yield(:part)) for it to work with other engines such as blog and news
 * You have some other interesting methods to work with snippets:
   * page.snippets: returns all the snippets attached to all the parts of page.
   * part.after: returns all the snippets attached after the html body of part.
