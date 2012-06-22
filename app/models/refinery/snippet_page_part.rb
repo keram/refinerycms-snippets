@@ -3,6 +3,8 @@ module Refinery
 
     self.table_name = 'snippets_page_parts'
 
+    attr_protected :id
+
     delegate :title, :to => :snippet
 
     belongs_to :snippet, :foreign_key => :snippet_id
