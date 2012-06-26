@@ -20,12 +20,10 @@ module Refinery
           plugin.name = "refinery_snippets"
           plugin.url = proc {Refinery::Core::Engine.routes.url_helpers.admin_snippets_path}
           plugin.menu_match = /^\/?(admin|refinery)\/snippets/
-          plugin.activity = [{
+          plugin.activity = {
                                :class_name => :'refinery/snippet',
                                :title => 'title'
-                             }, {
-                               :class_name => :'refinery/snippet_page_part',
-                             }]
+                             }
         end
       end
 
