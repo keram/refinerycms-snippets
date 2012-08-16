@@ -3,6 +3,8 @@ module Refinery
 
     TEMPLATES_DIR = "app/views/shared/snippets"
 
+    attr_protected :id
+
     acts_as_indexed :fields => [:title, :body]
 
     validates :title, :presence => true, :uniqueness => true

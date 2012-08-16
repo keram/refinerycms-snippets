@@ -5,7 +5,7 @@
     <ul>
       <% @page.parts.each do |part|%>
         <li>
-          <%= link_to(part.title, main_app.url_for(:anchor => "part-#{part.id}")) %> |
+          <%= link_to(part.title, refinery.url_for(:anchor => "part-#{part.id}")) %> |
         </li>
       <% end %>
     </ul>
