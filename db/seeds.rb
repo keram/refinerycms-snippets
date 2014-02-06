@@ -1,6 +1,14 @@
-Refinery::User.find(:all).each do |user|
-  if user.plugins.where(:name => 'refinery_snippets').blank?
-    user.plugins.create(:name => 'refinery_snippets',
-                        :position => (user.plugins.maximum(:position) || -1) +1)
+plugin = Refinery::Plugins['snippets']
+
+if plugin && defined?(Refinery::User)
+  Refinery::User.all.each do |user|
+    if user.plugins.find_by(name: plugin.name).nil?
+      user.plugins.create(name: plugin.name,
+                          position: (user.plugins.maximum(:position) || -1) +1)
+    end
   end
-end if defined?(Refinery::User)
+
+
+  Refinery::Snippet.create(title: 'test snippet', body: 'lorem ipsum')
+  Refinery::Snippet.create(title: 'second snippet', body: 'lorem <b>ipsum</b>athz')
+end

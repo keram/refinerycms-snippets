@@ -1,2 +1,5 @@
 <%= will_paginate @snippets %>
-<%= render :partial => "sortable_list" %>
+<ul class="records">
+  <%= render partial: 'snippet', collection: @snippets %>
+</ul>
+<%= will_paginate @snippets %>

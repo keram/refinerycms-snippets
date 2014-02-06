@@ -22,7 +22,7 @@ module Refinery
       end
 
       def version
-        ::Refinery::Blog::Version.to_s
+        ::Refinery::Snippets::Version.to_s
       end
     end
   end

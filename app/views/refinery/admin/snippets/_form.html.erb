@@ -1,35 +1,51 @@
 <%= form_for [refinery, :admin, @snippet] do |f| -%>
-  <%= render :partial => "/refinery/admin/error_messages", :locals => {
-          :object => @snippet,
-          :include_object_name => true
-        } %>
+  <div class="clearfix">
 
-  <%= render :partial => "locale_picker",
-             :locals => {
-               :current_locale => Thread.current[:globalize_locale]
-             } if defined?(::Refinery::I18n) %>
+    <%= render('/refinery/admin/locale_picker',
+                (@snippet.new_record? ?
+                  { url: 'new_admin_snippet_path' } :
+                  { url: 'edit_admin_snippet_path', url_options: { id: @snippet } })
+              ) if Refinery::I18n.frontend_locales.many? %>
 
-  <div class='field'>
-    <%= f.label :title -%>
-    <%= f.text_field :title, :class => 'larger widest' -%>
-  </div>
-  <br />
-  <div class='field'>
-    <div class='clearfix ui-tabs ui-widget ui-widget-content ui-corner-all'>
-      <div>
-        <% [:body].each do |part| %>
-          <div>
-            <%= f.text_area part, :rows => 20, :class => 'wymeditor widest' -%>
-          </div>
-        <% end %>
+    <div class="form-title">
+      <h1>
+      <% if @snippet.new_record? %>
+        <%= t('new_snippet', scope: 'refinery.admin.snippets.actions') %>
+      <% else %>
+        <%= t('edit_snippet', scope: 'refinery.admin.snippets.actions') %>:
+        <%= @snippet.title %>
+      <% end -%>
+      </h1>
+
+      <div class="clearfix">
+        <div class="breadcrumbs less-important">
+          <p>
+            <%= link_to refinery_plugin.title, refinery_plugin.url %>
+          </p>
+        </div>
       </div>
     </div>
+  </div>
 
-  <%= render :partial => '/refinery/admin/form_actions',
-              :locals => {
-                :f => f,
-                :continue_editing => true,
-                :delete_title => t('delete', :scope => 'refinery.admin.snippets.snippet'),
-                :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @snippet.title)
+  <%= render '/refinery/admin/error_messages',
+              object: f.object,
+              include_object_name: true %>
+
+  <div class="field">
+    <%= f.label :title -%>
+    <%= f.text_field :title, class: 'larger widest' -%>
+  </div>
+
+  <div class="field">
+    <%= f.label :body -%>
+    <%= f.text_area :body, rows: 20, class: 'widest' -%>
+  </div>
+
+  <%= render partial: '/refinery/admin/form_actions',
+              locals: {
+                f: f,
+                continue_editing: true,
+                delete_title: t('delete', scope: 'refinery.admin.snippets.snippet'),
+                delete_confirmation: t('message', scope: 'refinery.admin.delete', title: @snippet.title)
               } %>
 <% end -%>

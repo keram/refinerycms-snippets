@@ -1,22 +1,22 @@
-<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(snippet) -%>">
-  <span class='title'>
+<li class="clearfix record" id="<%= dom_id snippet %>">
+  <span class="title">
     <%= snippet.title %>
-    <% if defined?(::Refinery::I18n) and ::Refinery::I18n.frontend_locales.many? and
-          (locales = snippet.translations.collect{|t| t.locale}).present? %>
-      <span class='preview'>
-        <% locales.each do |locale| %>
-          <%= refinery_icon_tag "flags/#{locale}.png", :size => '16x11' %>
-        <% end %>
-      </span>
-    <% end %>
   </span>
-  <span class='actions'>
-    <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_admin_snippet_path(snippet),
-         :title => t('.edit') %>
-    <%= link_to refinery_icon_tag("delete.png"), refinery.admin_snippet_path(snippet),
-        :class => "cancel confirm-delete",
-        :title => t('.delete'),
-        :confirm => t('message', :scope => 'refinery.admin.delete', :title => snippet.title),
-        :method => :delete %>
+  <span class="actions">
+    <%= link_to t('delete', scope: 'refinery.admin.record'),
+                refinery.admin_snippet_path(snippet),
+                class: 'delete confirm-delete nojs-hide icon-small delete-icon',
+                title: t('.delete'),
+                data: {
+                  remote: true,
+                  confirm: t('message', scope: 'refinery.admin.delete', title: snippet.title)
+                },
+                method: :delete %>
+
+    <%= link_to t('edit', scope: 'refinery.admin.record'),
+                refinery.edit_admin_snippet_path(snippet),
+                class: 'icon-small edit-icon',
+                title: t('.edit') %>
+
   </span>
 </li>

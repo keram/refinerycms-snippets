@@ -9,37 +9,64 @@ module Refinery
       engine_name :refinery_snippets
 
       config.before_initialize do
-        require 'extensions/page_extensions'
-        require 'extensions/application_helper_extensions'
+        require 'extensions/page_part_extensions'
       end
 
-      initializer "register refinery_snippets plugin", :after => :set_routes_reloader do |app|
+      initializer 'register refinery_snippets plugin', after: :set_routes_reloader do |app|
 
         Refinery::Plugin.register do |plugin|
           plugin.pathname = root
-          plugin.name = "refinery_snippets"
+          plugin.name = 'snippets'
           plugin.url = proc {Refinery::Core::Engine.routes.url_helpers.admin_snippets_path}
-          plugin.menu_match = /^\/?(admin|refinery)\/snippets/
           plugin.activity = {
-                               :class_name => :'refinery/snippet',
-                               :title => 'title'
-                             }
+            class_name: :'refinery/snippet',
+            title: 'title'
+          }
         end
       end
 
       config.to_prepare do
-        Refinery::PagePart.module_eval do
-          has_many :snippet_page_parts, :dependent => :destroy
-          has_many :snippets, :through => :snippet_page_parts, :order => 'position ASC'
-        end
-        Refinery::Page.send :include, Extensions::Page
-        ApplicationHelper.send :include, Extensions::ApplicationHelper
+        Refinery::PagePart.send :include, Extensions::PagePart
+
       end
 
       config.after_initialize do
         ::Refinery::Pages::Tab.register do |tab|
-          tab.name = "snippets"
-          tab.partial = "/refinery/admin/pages/tabs/snippets"
+          tab.name = 'snippets'
+          tab.partial = '/refinery/admin/pages/tabs/snippets'
+        end
+
+        Refinery::Admin::PagesController.class_eval do
+          before_action :update_snippets_position, only: [:update, :create]
+
+          private
+
+          def permitted_page_parts_params_with_snippets
+            @permitted_page_parts_params ||= permitted_page_parts_params_without_snippets + permitted_snippet_page_parts_params
+          end
+
+          def permitted_snippet_page_parts_params
+            [
+              before_page_part_snippets_attributes: [:id, :snippet_id, :page_part_id, :active, :position],
+              after_page_part_snippets_attributes: [:id, :snippet_id, :page_part_id, :active, :position]
+            ]
+          end
+
+          alias_method_chain :permitted_page_parts_params, :snippets
+
+          def update_snippets_position
+            if params[:page] && params[:page][:parts_attributes]
+              params[:page][:parts_attributes].each do |part|
+                part[1][:before_page_part_snippets_attributes].each_with_index do |snippet, index|
+                  snippet[1][:position] = index
+                end if part[1][:before_page_part_snippets_attributes]
+
+                part[1][:after_page_part_snippets_attributes].each_with_index do |snippet, index|
+                  snippet[1][:position] = index
+                end if part[1][:after_page_part_snippets_attributes]
+              end
+            end
+          end
         end
 
         Refinery.register_engine(Refinery::Snippets)

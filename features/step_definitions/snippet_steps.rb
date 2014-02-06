@@ -5,7 +5,7 @@ end
 Given /^I (only )?have snippets titled "?([^\"]*)"?$/ do |only, titles|
   Snippet.delete_all if only
   titles.split(', ').each do |title|
-    Snippet.create(:title => title)
+    Snippet.create(title: title)
   end
 end
 

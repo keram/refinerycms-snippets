@@ -1,28 +1,8 @@
 <ul>
-  <% if Refinery::Admin::SnippetsController.searchable? %>
-    <li>
-      <%= render :partial => "/refinery/admin/search",
-                  :locals => {
-                    :url => refinery.admin_snippets_path
-                  } %>
-    </li>
-  <% end %>
   <li>
     <%= link_to t('.create_new'), refinery.new_admin_snippet_path,
-                 :class => "add_icon" %>
+                class: 'icon-small icon-with-text add-icon' %>
   </li>
-<% if !searching? and Refinery::Admin::SnippetsController.sortable? and Refinery::Snippet.count > 1 %>
-  <li>
-    <%= link_to t('.reorder', :what => "Snippets"),
-                 refinery.admin_snippets_path,
-                 :id => "reorder_action",
-                 :class => "reorder_icon" %>
-
-    <%= link_to t('.reorder_done', :what => "Snippets"),
-                 refinery.admin_snippets_path,
-                 :id => "reorder_action_done",
-                 :style => "display: none;",
-                 :class => "reorder_icon" %>
-  </li>
-<% end %>
 </ul>
+
+<%= render 'refinery/admin/actions_locale_picker', url: refinery.admin_snippets_path %>

@@ -1,3 +1,13 @@
-<div class="wym_skin_refinery page_part" id="page_snippet_picker">
-  <%= render :partial => '/refinery/admin/pages/tabs/snippets_content', :locals => {:f => f} %>
+<div class="ui-tabs ui-tabs-vertical clearfix" id="snippets-page-parts" style="padding-top: 0.5em;">
+  <ul style="margin-top: 2em;">
+  <% page_url = @page.new_record? ?
+        refinery.new_admin_page_path( parent_id: params[:parent_id] ) :
+        refinery.edit_admin_page_path( id: @page.nested_url ) %>
+  <% @page.parts.each_with_index do |part, i| %>
+    <li>
+      <%= link_to t(part.title, scope: 'refinery.admin.pages.parts'), "#{page_url}#snippets-page-parts-#{i}" %>
+    </li>
+  <% end %>
+  </ul>
+  <%= render partial: '/refinery/admin/pages/tabs/snippets_field', collection: @page.parts, as: :part %>
 </div>

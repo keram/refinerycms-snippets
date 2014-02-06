@@ -1,101 +1,22 @@
+# Encoding: UTF-8
+
+require 'date'
+require File.expand_path('../lib/refinery/snippets/version', __FILE__)
+
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
-  s.name              = %q{refinerycms-snippets}
-  s.version           = %q{2.0.0}
+  s.name              = 'refinerycms-snippets'
+  s.version           = Refinery::Snippets::Version.to_s
   s.description       = %q{Ruby on Rails Snippets engine for Refinery CMS}
-  s.date              = %q{2011-12-14}
+  s.date              = Date.today.strftime("%Y-%m-%d")
   s.summary           = %q{Html snippets for Refinery CMS page}
   s.authors           = ['Marek L.', 'Rodrigo Garcia Suarez']
-  s.email             = %q{nospam.keram@gmail.com}
+  s.email             = 'nospam.keram@gmail.com'
+  s.homepage          = 'https://www.github.com/keram/refinerycms-inquiries2'
   s.require_paths     = %w(lib)
-  
-  s.add_dependency    'refinerycms-pages', '>= 2.0.0'
+  s.files             = Dir["{app,config,db,lib}/**/*"] + ["readme.md"]
 
-  s.files             = [
-    'app',
-    'app/assets',
-    'app/assets/javascripts',
-    'app/assets/javascripts/page-snippet-picker.js',
-    'app/assets/javascripts/part-snippets-select.js',
-    'app/assets/stylesheets',
-    'app/assets/stylesheets/page-snippet-picker.css',
-    'app/controllers',
-    'app/controllers/refinery',
-    'app/controllers/refinery/admin',
-    'app/controllers/refinery/admin/snippets_controller.rb',
-    'app/controllers/refinery/admin/snippets_page_parts_controller.rb',
-    'app/models',
-    'app/models/refinery',
-    'app/models/refinery/snippet.rb',
-    'app/models/refinery/snippet_page.rb',
-    'app/models/refinery/snippet_page_part.rb',
-    'app/views',
-    'app/views/refinery',
-    'app/views/refinery/admin',
-    'app/views/refinery/admin/pages',
-    'app/views/refinery/admin/pages/tabs',
-    'app/views/refinery/admin/pages/tabs/_snippets.html.erb',
-    'app/views/refinery/admin/pages/tabs/_snippets_content.html.erb',
-    'app/views/refinery/admin/pages/tabs/_snippets_field.html.erb',
-    'app/views/refinery/admin/pages/tabs/_snippets_list_item.html.erb',
-    'app/views/refinery/admin/snippets',
-    'app/views/refinery/admin/snippets/_actions.html.erb',
-    'app/views/refinery/admin/snippets/_form.html.erb',
-    'app/views/refinery/admin/snippets/_form_actions.html.erb',
-    'app/views/refinery/admin/snippets/_locale_picker.html.erb',
-    'app/views/refinery/admin/snippets/_records.html.erb',
-    'app/views/refinery/admin/snippets/_snippet.html.erb',
-    'app/views/refinery/admin/snippets/_snippets.html.erb',
-    'app/views/refinery/admin/snippets/_sortable_list.html.erb',
-    'app/views/refinery/admin/snippets/edit.html.erb',
-    'app/views/refinery/admin/snippets/index.html.erb',
-    'app/views/refinery/admin/snippets/new.html.erb',
-    'app/views/refinery/admin/snippets_page_parts',
-    'app/views/refinery/admin/snippets_page_parts/add.html.erb',
-    'app/views/refinery/admin/snippets_page_parts/remove.html.erb',
-    'config',
-    'config/locales',
-    'config/locales/en.yml',
-    'config/locales/es.yml',
-    'config/locales/nl.yml',
-    'config/routes.rb',
-    'db',
-    'db/migrate',
-    'db/migrate/1_create_snippets.rb',
-    'db/migrate/2_translate_snippets.rb',
-    'db/migrate/3_create_snippets_page_parts.rb',
-    'db/seeds.rb',
-    'features',
-    'features/manage_snippets.feature',
-    'features/step_definitions',
-    'features/step_definitions/snippet_steps.rb',
-    'features/support',
-    'features/support/paths.rb',
-    'lib',
-    'lib/extensions',
-    'lib/extensions/page_extensions.rb',
-    'lib/extensions/pages_helper_extensions.rb',
-    'lib/gemspec.rb',
-    'lib/generators',
-    'lib/generators/refinery',
-    'lib/generators/refinery/snippets_generator.rb',
-    'lib/refinery',
-    'lib/refinery/snippets',
-    'lib/refinery/snippets/engine.rb',
-    'lib/refinery/snippets/tabs.rb',
-    'lib/refinery/snippets/version.rb',
-    'lib/refinery/snippets.rb',
-    'lib/refinerycms-snippets.rb',
-    'lib/tasks',
-    'lib/tasks/snippets.rake',
-    'readme.md',
-    'refinerycms-snippets.gemspec',
-    'spec',
-    'spec/helpers',
-    'spec/helpers/pages_helper_spec.rb',
-    'spec/models',
-    'spec/models/page_spec.rb',
-    'spec/models/snippet_spec.rb'
-  ]
-  s.require_path = 'lib'
+  # Runtime dependencies
+  s.add_dependency    'refinerycms-core',     '~> 2.718.0.dev'
+  s.add_dependency    'refinerycms-settings', '~> 2.718.0.dev'
 end

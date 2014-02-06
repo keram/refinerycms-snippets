@@ -1,18 +1,7 @@
-Refinery::Core::Engine.routes.append do
+Refinery::Core::Engine.routes.draw do
 
-  # Admin routes
-  namespace :admin, :path => 'refinery', :as => 'admin' do
-    resources :snippets, except: :show do
-      collection do
-        post :update_positions
-      end
-    end
-    resources :snippets_page_parts do
-      member do
-        get 'add'
-        get 'remove'
-      end
-    end
+  namespace :admin, path: Refinery::Core.backend_route do
+    resources :snippets, except: :show
   end
 
 end

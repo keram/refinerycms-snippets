@@ -1,11 +1,13 @@
 en:
   refinery:
     plugins:
-      refinery_snippets:
+      snippets:
         title: Snippets
     admin:
       snippets:
         actions:
+          edit_snippet: Edit Snippet
+          new_snippet: New Snippet
           create_new: Add New Snippet
           reorder: Reorder Snippets
           reorder_done: Done Reordering Snippets
@@ -19,13 +21,14 @@ en:
           delete: Remove this snippet forever
       pages:
         tabs:
+          snippets: Snippets
           snippets_content:
             please_save_page_before: Please save this page before you can add any snippets.
           snippets_field:
             active: Active
             inactive: Inactive
-            add_after_body: Add after body
-            add_before_body: Add before body
+            add_after: Add after
+            add_before: Add before
             after_body: After body
             before_body: Before body
           snippets_list_item:
@@ -36,9 +39,8 @@ en:
         other: Other Snippets
   activerecord:
     models:
-      refinery/snippet: snippet
+      refinery/snippet: Snippet
       refinery/snippet_page_part: Snippet association
     attributes:
       refinery/snippet:
         title: Title
-
