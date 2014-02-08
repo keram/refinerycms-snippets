@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
 
   # Runtime dependencies
   s.add_dependency    'refinerycms-core',     '~> 2.718.0.dev'
+  s.add_dependency    'decorators',           '~> 1.0.3'
 end

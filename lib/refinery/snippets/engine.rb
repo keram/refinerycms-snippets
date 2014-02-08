@@ -1,4 +1,5 @@
 require 'refinerycms-snippets'
+require 'decorators'
 
 module Refinery
   module Snippets
@@ -17,7 +18,7 @@ module Refinery
         Refinery::Plugin.register do |plugin|
           plugin.pathname = root
           plugin.name = 'snippets'
-          plugin.url = proc {Refinery::Core::Engine.routes.url_helpers.admin_snippets_path}
+          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.admin_snippets_path }
           plugin.activity = {
             class_name: :'refinery/snippet',
             title: 'title'
@@ -27,11 +28,11 @@ module Refinery
 
       config.to_prepare do
         Refinery::PagePart.send :include, Extensions::PagePart
-
+        Decorators.register! Refinery::Snippets.root
       end
 
       config.after_initialize do
-        ::Refinery::Pages::Tab.register do |tab|
+        Refinery::Pages::Tab.register do |tab|
           tab.name = 'snippets'
           tab.partial = '/refinery/admin/pages/tabs/snippets'
         end
@@ -94,6 +95,7 @@ module Refinery
 
         Refinery.register_engine(Refinery::Snippets)
       end
+
     end
   end
 end
