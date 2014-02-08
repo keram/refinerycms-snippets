@@ -14,9 +14,8 @@ Gem::Specification.new do |s|
   s.email             = 'nospam.keram@gmail.com'
   s.homepage          = 'https://www.github.com/keram/refinerycms-inquiries2'
   s.require_paths     = %w(lib)
-  s.files             = Dir["{app,config,db,lib}/**/*"] + ["readme.md"]
+  s.files             = `git ls-files -- app/* lib/*`.split("\n")
 
   # Runtime dependencies
   s.add_dependency    'refinerycms-core',     '~> 2.718.0.dev'
-  s.add_dependency    'refinerycms-settings', '~> 2.718.0.dev'
 end
