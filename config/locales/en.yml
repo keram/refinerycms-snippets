@@ -9,14 +9,11 @@ en:
           edit_snippet: Edit Snippet
           new_snippet: New Snippet
           create_new: Add New Snippet
-          reorder: Reorder Snippets
-          reorder_done: Done Reordering Snippets
         records:
           title: Snippets
           sorry_no_results: Sorry! There are no results found.
           no_items_yet: There are no Snippets yet. Click "Add New Snippet" to add your first snippet.
         snippet:
-          view_live_html: View this snippet live <br/><em>(opens in a new window)</em>
           edit: Edit this snippet
           delete: Remove this snippet forever
           text: Text
@@ -24,19 +21,12 @@ en:
       pages:
         tabs:
           snippets: Snippets
-          snippets_content:
-            please_save_page_before: Please save this page before you can add any snippets.
           snippets_field:
-            add_after: Add after
-            add_before: Add before
-            after_body: After body
-            before_body: Before body
+            after_part_body: After part body
+            before_part_body: Before part body
           snippets_list_item:
             remove: Remove
             edit: Edit
-    snippets:
-      show:
-        other: Other Snippets
   activerecord:
     models:
       refinery/snippet: Snippet
@@ -44,3 +34,5 @@ en:
     attributes:
       refinery/snippet:
         title: Title
+        canonical_friendly_id: Canonical friendly id
+        body: Body
