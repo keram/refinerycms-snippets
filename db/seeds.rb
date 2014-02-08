@@ -7,8 +7,4 @@ if plugin && defined?(Refinery::User)
                           position: (user.plugins.maximum(:position) || -1) +1)
     end
   end
-
-
-  Refinery::Snippet.create(title: 'test snippet', body: 'lorem ipsum')
-  Refinery::Snippet.create(title: 'second snippet', body: 'lorem <b>ipsum</b>athz')
 end
