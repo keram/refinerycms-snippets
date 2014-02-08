@@ -1,6 +1,6 @@
 <div class="ui-tabs ui-tabs-vertical clearfix" id="snippets-page-parts" style="padding-top: 10px;" >
 <% parts = @page.parts.select {|p| p.active } %>
-  <ul style="margin-top: 2em;">
+  <ul style="margin-top: 29px;">
   <% page_url = @page.new_record? ?
         refinery.new_admin_page_path( parent_id: params[:parent_id] ) :
         refinery.edit_admin_page_path( id: @page.nested_url ) %>

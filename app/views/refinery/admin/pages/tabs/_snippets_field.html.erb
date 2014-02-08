@@ -22,7 +22,7 @@
 <div id="<%= "snippets-page-parts-#{part_counter}" %>" class="ui-tabs-panel clearfix">
   <div class="hemisquare">
   <%= checkboxes do -%>
-    <h3>Before part body -t-</h3>
+    <h3><%= t('.before_part_body') %></h3>
     <ul class="records checkboxes ui-sortable">
 
     <% before_snippets.each_with_index do |snippet, index| %>
@@ -48,7 +48,7 @@
   <div class="hemisquare right-side">
 
   <%= checkboxes do -%>
-    <h3>After part body -t-</h3>
+    <h3><%= t('.after_part_body') %></h3>
     <ul class="records checkboxes ui-sortable">
 
     <% after_snippets.each_with_index do |snippet, index| %>
