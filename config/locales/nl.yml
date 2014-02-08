@@ -1,22 +1,38 @@
 nl:
   refinery:
     plugins:
-      refinery_snippets:
+      snippets:
         title: Snippets
     admin:
       snippets:
         actions:
+          edit_snippet: Edit Snippet
+          new_snippet: New Snippet
           create_new: Maak een nieuwe Snippet
-          reorder: Wijzig de volgorde van de Snippets
-          reorder_done: Klaar met het wijzingen van de volgorde van de Snippets
         records:
           title: Snippets
           sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
           no_items_yet: Er zijn nog geen Snippets. Druk op 'Maak een nieuwe Snippet' om de eerste aan te maken.
         snippet:
-          view_live_html: Bekijk deze snippet op de website <br/><em>(opent een nieuw venster)</em>
           edit: Bewerk deze snippet
           delete: Verwijder deze snippet voor eeuwig
-    snippets:
-      show:
-        other: Andere Snippets
+          text: Text
+          template: Template
+      pages:
+        tabs:
+          snippets: Snippets
+          snippets_field:
+            after_part_body: After part body
+            before_part_body: Before part body
+          snippets_list_item:
+            remove: Remove
+            edit: Edit
+  activerecord:
+    models:
+      refinery/snippet: Snippet
+      refinery/snippet_page_part: Snippet association
+    attributes:
+      refinery/snippet:
+        title: Title
+        canonical_friendly_id: Canonical friendly id
+        body: Body
