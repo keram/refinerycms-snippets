@@ -15,11 +15,11 @@ class CreatePagePartSnippets < ActiveRecord::Migration
 
     add_index ::Refinery::BeforePagePartSnippet.table_name, [:snippet_id, :page_part_id],
                 unique: true,
-                name: 'index_on_snippet_id_and_page_part_id'
+                name: 'index_on_before_snippet_id_and_page_part_id'
 
     add_index ::Refinery::AfterPagePartSnippet.table_name, [:snippet_id, :page_part_id],
                 unique: true,
-                name: 'index_on_snippet_id_and_page_part_id'
+                name: 'index_on_after_snippet_id_and_page_part_id'
   end
 
   def down
