@@ -1,42 +1,71 @@
+<%
+  # this is first implementation and should be cleaned eventualy
+  # todo: clean
+  snippets = Refinery::Snippet.all.to_a
+  snippets_before_ids = part.before_page_part_snippets.map(&:snippet_id)
+  before_snippets = part.before_page_part_snippets.map(&:snippet) | snippets
+  part_bkey = "snippets_before_#{part.id || part.title}"
+  if params[part_bkey]
+    params_snippets = params[part_bkey].map {|s| s[1][:snippet_id] }
+    before_snippets.sort! {|a, b| params_snippets.index(a.id.to_s) <=> params_snippets.index(b.id.to_s) }.map(&:id)
+  end
+
+  snippets_after_ids = part.after_page_part_snippets.map(&:snippet_id)
+  after_snippets = part.after_page_part_snippets.map(&:snippet) | snippets
+  part_akey = "snippets_after_#{part.id || part.title}"
+  if params[part_akey]
+    params_snippets = params[part_akey].map {|s| s[1][:snippet_id] }
+    after_snippets.sort! {|a, b| params_snippets.index(a.id.to_s) <=> params_snippets.index(b.id.to_s) }.map(&:id)
+  end
+%>
+
 <div id="<%= "snippets-page-parts-#{part_counter}" %>" class="ui-tabs-panel clearfix">
   <div class="hemisquare">
   <%= checkboxes do -%>
     <h3>Before part body -t-</h3>
     <ul class="records checkboxes ui-sortable">
-    <% part.before_page_part_snippets.each_with_index do |s_wrap, index| %>
-      <li>
-        <%= hidden_field_tag "page[parts_attributes][#{part.position}][before_page_part_snippets_attributes][#{index}][snippet_id]", s_wrap.snippet.id %>
-        <%= hidden_field_tag "page[parts_attributes][#{part.position}][before_page_part_snippets_attributes][#{index}][id]", s_wrap.id unless s_wrap.new_record? %>
-        <%= hidden_field_tag "page[parts_attributes][#{part.position}][before_page_part_snippets_attributes][#{index}][active]", 0, id: nil %>
-        <%= check_box_tag "page[parts_attributes][#{part.position}][before_page_part_snippets_attributes][#{index}][active]",
-                    1, s_wrap.active,
-                    id: "snippet_before_#{part.title}_#{s_wrap.snippet.id}" %>
 
-        <%= label_tag nil, s_wrap.title,
+    <% before_snippets.each_with_index do |snippet, index| %>
+      <li>
+        <% snippet_activated = params[part_bkey] && (!params[part_bkey].map {|s| s[1] }.select {|s| s[:snippet_id] == snippet.id.to_s && s[:active] == "1" }.empty?) %>
+        <% snippet_persisted = snippets_before_ids.include?(snippet.id) %>
+        <% if snippet_persisted %>
+          <%= hidden_field_tag "#{part_bkey}[#{index}][id]", part.before_page_part_snippets.select {|s| s.snippet.id == snippet.id }.first.id %>
+        <% end %>
+        <%= hidden_field_tag "#{part_bkey}[#{index}][snippet_id]", snippet.id %>
+        <%= hidden_field_tag "#{part_bkey}[#{index}][active]", 0 %>
+        <%= check_box_tag "#{part_bkey}[#{index}][active]", 1,
+                    (snippet_persisted && snippet_activated.nil?) || snippet_activated,
+                    id: "#{part_bkey}_#{index}" %>
+        <%= label_tag nil, snippet.title,
                     class: 'stripped',
-                    for: "snippet_before_#{part.title}_#{s_wrap.snippet.id}" %>
+                    for: "#{part_bkey}_#{index}" %>
       </li>
     <% end %>
     </ul>
   <% end %>
   </div>
   <div class="hemisquare right-side">
+
   <%= checkboxes do -%>
     <h3>After part body -t-</h3>
     <ul class="records checkboxes ui-sortable">
-    <% part.after_page_part_snippets.each_with_index do |s_wrap, index| %>
+
+    <% after_snippets.each_with_index do |snippet, index| %>
       <li>
-        <%= hidden_field_tag "page[parts_attributes][#{part.position}][after_page_part_snippets_attributes][#{index}][snippet_id]", s_wrap.snippet.id %>
-        <%= hidden_field_tag "page[parts_attributes][#{part.position}][after_page_part_snippets_attributes][#{index}][id]", s_wrap.id unless s_wrap.new_record? %>
-        <%= hidden_field_tag "page[parts_attributes][#{part.position}][after_page_part_snippets_attributes][#{index}][active]", 0, id: nil %>
-        <%= check_box_tag "page[parts_attributes][#{part.position}][after_page_part_snippets_attributes][#{index}][active]",
-                    1, s_wrap.active,
-                    id: "snippet_after_#{part.title}_#{s_wrap.snippet.id}" %>
-
-        <%= label_tag nil, s_wrap.title,
+        <% snippet_activated = params[part_akey] && (!params[part_akey].map {|s| s[1] }.select {|s| s[:snippet_id] == snippet.id.to_s && s[:active] == "1" }.empty?) %>
+        <% snippet_persisted = snippets_after_ids.include?(snippet.id) %>
+        <% if snippet_persisted %>
+          <%= hidden_field_tag "#{part_akey}[#{index}][id]", part.after_page_part_snippets.select {|s| s.snippet.id == snippet.id }.first.id %>
+        <% end %>
+        <%= hidden_field_tag "#{part_akey}[#{index}][snippet_id]", snippet.id %>
+        <%= hidden_field_tag "#{part_akey}[#{index}][active]", 0 %>
+        <%= check_box_tag "#{part_akey}[#{index}][active]", 1,
+                    (snippet_persisted && snippet_activated.nil?) || snippet_activated,
+                    id: "#{part_akey}_#{index}" %>
+        <%= label_tag nil, snippet.title,
                     class: 'stripped',
-                    for: "snippet_after_#{part.title}_#{s_wrap.snippet.id}" %>
-
+                    for: "#{part_akey}_#{index}" %>
       </li>
     <% end %>
     </ul>

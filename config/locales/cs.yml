@@ -21,8 +21,6 @@ cs:
         snippets_content:
           please_save_page_before: Před přidáním výstřižků prosím uložte tuto stránku.
         snippets_field:
-          active: Aktivní
-          inactive: Neaktivní
           add_after_body: Přidat za obsah
           add_before_body: Přidat před obsah
           after_body: Před obsah

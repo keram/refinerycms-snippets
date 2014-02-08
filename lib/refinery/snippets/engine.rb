@@ -37,7 +37,7 @@ module Refinery
         end
 
         Refinery::Admin::PagesController.class_eval do
-          before_action :update_snippets_position, only: [:update, :create]
+          before_action :add_snippets_to_page_params, only: [:update, :create]
 
           private
 
@@ -47,23 +47,46 @@ module Refinery
 
           def permitted_snippet_page_parts_params
             [
-              before_page_part_snippets_attributes: [:id, :snippet_id, :page_part_id, :active, :position],
-              after_page_part_snippets_attributes: [:id, :snippet_id, :page_part_id, :active, :position]
+              before_page_part_snippets_attributes: [:id, :snippet_id, :page_part_id, :position, :_destroy],
+              after_page_part_snippets_attributes: [:id, :snippet_id, :page_part_id,  :position, :_destroy]
             ]
           end
 
           alias_method_chain :permitted_page_parts_params, :snippets
 
-          def update_snippets_position
+          def add_snippets_to_page_params
             if params[:page] && params[:page][:parts_attributes]
-              params[:page][:parts_attributes].each do |part|
-                part[1][:before_page_part_snippets_attributes].each_with_index do |snippet, index|
-                  snippet[1][:position] = index
-                end if part[1][:before_page_part_snippets_attributes]
 
-                part[1][:after_page_part_snippets_attributes].each_with_index do |snippet, index|
-                  snippet[1][:position] = index
-                end if part[1][:after_page_part_snippets_attributes]
+              params[:page][:parts_attributes].each do |part|
+                part_bkey = "snippets_before_#{part[1][:id] || part[1][:title]}"
+                params[part_bkey].each_with_index do |snippet, index|
+                  part[1][:before_page_part_snippets_attributes] ||= []
+                  if snippet[1][:active] == "1" || snippet[1][:id].present?
+                    snippet_block = {
+                      snippet_id: snippet[1][:snippet_id],
+                      position: index,
+                      _destroy: (snippet[1][:active] == "0")
+                    }
+
+                    snippet_block[:id] = snippet[1][:id] if snippet[1][:id].present?
+                    part[1][:before_page_part_snippets_attributes] << snippet_block
+                  end
+                end if params[part_bkey]
+
+                part_akey = "snippets_after_#{part[1][:id] || part[1][:title]}"
+                params[part_akey].each_with_index do |snippet, index|
+                  part[1][:after_page_part_snippets_attributes] ||= []
+                  if snippet[1][:active] == "1" || snippet[1][:id].present?
+                    snippet_block = {
+                      snippet_id: snippet[1][:snippet_id],
+                      position: index,
+                      _destroy: (snippet[1][:active] == "0")
+                    }
+
+                    snippet_block[:id] = snippet[1][:id] if snippet[1][:id].present?
+                    part[1][:after_page_part_snippets_attributes] << snippet_block
+                  end
+                end if params[part_akey]
               end
             end
           end

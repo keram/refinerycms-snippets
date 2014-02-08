@@ -1,13 +1,15 @@
-<div class="ui-tabs ui-tabs-vertical clearfix" id="snippets-page-parts" style="padding-top: 0.5em;">
+<div class="ui-tabs ui-tabs-vertical clearfix" id="snippets-page-parts" style="padding-top: 10px;" >
+<% parts = @page.parts.select {|p| p.active } %>
   <ul style="margin-top: 2em;">
   <% page_url = @page.new_record? ?
         refinery.new_admin_page_path( parent_id: params[:parent_id] ) :
         refinery.edit_admin_page_path( id: @page.nested_url ) %>
-  <% @page.parts.each_with_index do |part, i| %>
+
+  <% parts.each_with_index do |part, i| %>
     <li>
       <%= link_to t(part.title, scope: 'refinery.admin.pages.parts'), "#{page_url}#snippets-page-parts-#{i}" %>
     </li>
   <% end %>
   </ul>
-  <%= render partial: '/refinery/admin/pages/tabs/snippets_field', collection: @page.parts, as: :part %>
+  <%= render partial: '/refinery/admin/pages/tabs/snippets_field', collection: parts, as: :part %>
 </div>

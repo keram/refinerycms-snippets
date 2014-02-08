@@ -2,6 +2,7 @@
   <span class="title">
     <%= snippet.title %>
   </span>
+  <%= snippet_meta_information(snippet) %>
   <span class="actions">
     <%= link_to t('delete', scope: 'refinery.admin.record'),
                 refinery.admin_snippet_path(snippet),

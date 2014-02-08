@@ -3,9 +3,8 @@ class CreateSnippets < ActiveRecord::Migration
   def up
     create_table ::Refinery::Snippet.table_name do |t|
       t.string :snippet_type, null: false, default: ::Refinery::Snippet::TYPES.first
+      t.string :canonical_friendly_id, null: false
       t.timestamps null: false
-      t.boolean :active_before_by_default, null: false, default: false
-      t.boolean :active_after_by_default, null: false, default: false
     end
 
     ::Refinery::Snippet.create_translation_table!({

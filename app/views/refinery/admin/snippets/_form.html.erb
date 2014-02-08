@@ -1,4 +1,5 @@
-<%= form_for [refinery, :admin, @snippet] do |f| -%>
+<%= form_for [refinery, :admin, @snippet],
+            html: { data: { remote: true }} do |f| -%>
   <div class="clearfix">
 
     <%= render('/refinery/admin/locale_picker',
@@ -18,6 +19,9 @@
       </h1>
 
       <div class="clearfix">
+        <div class="meta-informations right-side">
+          <%= snippet_meta_information(@snippet) unless @snippet.new_record? %>
+        </div>
         <div class="breadcrumbs less-important">
           <p>
             <%= link_to refinery_plugin.title, refinery_plugin.url %>
@@ -38,14 +42,20 @@
 
   <div class="field">
     <%= f.label :body -%>
-    <%= f.text_area :body, rows: 20, class: 'widest' -%>
+    <% if @snippet.snippet_type == 'text' %>
+      <%= f.text_area :body, rows: 20, class: 'widest' -%>
+    <% else %>
+      <%= f.text_field :body, class: 'widest' -%>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :canonical_friendly_id -%>
+    <%= f.text_field :canonical_friendly_id -%>
   </div>
 
   <%= render partial: '/refinery/admin/form_actions',
               locals: {
-                f: f,
-                continue_editing: true,
-                delete_title: t('delete', scope: 'refinery.admin.snippets.snippet'),
-                delete_confirmation: t('message', scope: 'refinery.admin.delete', title: @snippet.title)
+                f: f
               } %>
 <% end -%>

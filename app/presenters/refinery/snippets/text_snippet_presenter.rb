@@ -1,30 +1,22 @@
 module Refinery
   module Snippets
     class TextSnippetPresenter < SectionPresenter
-      def initialize snippet_wrapper
+      def initialize snippet_wrapper, context
         super()
         @content = snippet_wrapper.body
-        @hidden = !snippet_wrapper.active
-        @id = "snippet-#{snippet_wrapper.position_to_part}-#{snippet_wrapper.page_part.title}-#{snippet_wrapper.id}"
-      end
-
-      def not_present_css_class
-        "no_snippet_#{id}"
+        @id = snippet_wrapper.canonical_friendly_id
       end
 
     private
 
-      def wrap_content_in_tag(content)
-        content_tag(:div, content_tag(:div, content, class: 'inner'), id: id, class: 'snippet')
+      def wrapper_class
+        'snippet-wrapper'
       end
 
-      def render_content content
-        renderer.render content
+      def content_class
+        'snippet'
       end
 
-      def renderer
-        @renderer ||= Refinery.content_renderer
-      end
     end
   end
 end
