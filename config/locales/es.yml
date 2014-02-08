@@ -1,44 +1,38 @@
 es:
   refinery:
     plugins:
-      refinery_snippets:
+      snippets:
         title: Snippets
     admin:
       snippets:
         actions:
+          edit_snippet: Edit Snippet
+          new_snippet: New Snippet
           create_new: Añadir Snippet
-          reorder: Reordenar Snippets
-          reorder_done: Snippets reordenados
         records:
           title: Snippets
           sorry_no_results: No hay resultados.
           no_items_yet: No hay Snippets todavía. Usa "Añadir Snippet" para crear uno.
         snippet:
-          view_live_html: Ver el snippet <br/><em>(abre una nueva ventana)</em>
           edit: Editar este snippet
           delete: Borrar este snippet
+          text: Text
+          template: Template
       pages:
         tabs:
-          snippets_content:
-            please_save_page_before: Por favor guarda la página antes de añadir un snippet.
+          snippets: Snippets
           snippets_field:
-            active: Activo
-            inactive: Inactivo
-            add_after_body: Añadir después
-            add_before_body: Añadir antes
             after_body: Después
             before_body: Antes
           snippets_list_item:
             remove: Eliminar
             edit: Editar
-    snippets:
-      show:
-        other: Otros Snippets
   activerecord:
     models:
-      refinery/snippet: snippet
+      refinery/snippet: Snippet
       refinery/snippet_page_part: Asociación de snippet
     attributes:
       refinery/snippet:
         title: Título
-
+        canonical_friendly_id: Canonical friendly id
+        body: Body
