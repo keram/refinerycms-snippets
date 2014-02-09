@@ -4,7 +4,8 @@ module Refinery
   autoload :SnippetsGenerator, 'generators/refinery/snippets_generator'
 
   module Snippets
-    require 'refinery/snippets/engine' if defined?(Rails)
+    require 'refinery/snippets/engine'
+    require 'refinery/snippets/configuration'
 
     autoload :Version, 'refinery/snippets/version'
     autoload :Tab, 'refinery/snippets/tabs'

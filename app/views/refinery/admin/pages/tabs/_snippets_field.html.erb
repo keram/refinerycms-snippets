@@ -17,6 +17,8 @@
     params_snippets = params[part_akey].map {|s| s[1][:snippet_id] }
     after_snippets.sort! {|a, b| params_snippets.index(a.id.to_s) <=> params_snippets.index(b.id.to_s) }.map(&:id)
   end
+
+
 %>
 
 <div id="<%= "snippets-page-parts-#{part_counter}" %>" class="ui-tabs-panel clearfix">
@@ -28,6 +30,7 @@
     <% before_snippets.each_with_index do |snippet, index| %>
       <li>
         <% snippet_activated = params[part_bkey] && (!params[part_bkey].map {|s| s[1] }.select {|s| s[:snippet_id] == snippet.id.to_s && s[:active] == "1" }.empty?) %>
+        <% snippet_activate_by_default = !!Refinery::Snippets.activate_by_default[:"#{snippet.canonical_friendly_id.gsub('-', '_')}_before_#{part.title}"] %>
         <% snippet_persisted = snippets_before_ids.include?(snippet.id) %>
         <% if snippet_persisted %>
           <%= hidden_field_tag "#{part_bkey}[#{index}][id]", part.before_page_part_snippets.select {|s| s.snippet.id == snippet.id }.first.id %>
@@ -35,7 +38,7 @@
         <%= hidden_field_tag "#{part_bkey}[#{index}][snippet_id]", snippet.id %>
         <%= hidden_field_tag "#{part_bkey}[#{index}][active]", 0 %>
         <%= check_box_tag "#{part_bkey}[#{index}][active]", 1,
-                    (snippet_persisted && snippet_activated.nil?) || snippet_activated,
+                    ((snippet_persisted || snippet_activate_by_default) && snippet_activated.nil?) || snippet_activated,
                     id: "#{part_bkey}_#{index}" %>
         <%= label_tag nil, snippet.title,
                     class: 'stripped',
@@ -54,6 +57,7 @@
     <% after_snippets.each_with_index do |snippet, index| %>
       <li>
         <% snippet_activated = params[part_akey] && (!params[part_akey].map {|s| s[1] }.select {|s| s[:snippet_id] == snippet.id.to_s && s[:active] == "1" }.empty?) %>
+        <% snippet_activate_by_default = !!Refinery::Snippets.activate_by_default[:"#{snippet.canonical_friendly_id.gsub('-', '_')}_after_#{part.title}"] %>
         <% snippet_persisted = snippets_after_ids.include?(snippet.id) %>
         <% if snippet_persisted %>
           <%= hidden_field_tag "#{part_akey}[#{index}][id]", part.after_page_part_snippets.select {|s| s.snippet.id == snippet.id }.first.id %>
@@ -61,7 +65,7 @@
         <%= hidden_field_tag "#{part_akey}[#{index}][snippet_id]", snippet.id %>
         <%= hidden_field_tag "#{part_akey}[#{index}][active]", 0 %>
         <%= check_box_tag "#{part_akey}[#{index}][active]", 1,
-                    (snippet_persisted && snippet_activated.nil?) || snippet_activated,
+                    ((snippet_persisted || snippet_activate_by_default) && snippet_activated.nil?) || snippet_activated,
                     id: "#{part_akey}_#{index}" %>
         <%= label_tag nil, snippet.title,
                     class: 'stripped',
