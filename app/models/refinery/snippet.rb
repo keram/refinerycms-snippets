@@ -4,11 +4,13 @@ module Refinery
 
     TYPES = ['text', 'template']
 
+    before_validation :create_canonical_friendly_id
+
     validates :title, presence: true, uniqueness: true
+    validates :canonical_friendly_id, presence: true, uniqueness: true
 
     translates :title, :body
 
-    before_save :create_canonical_friendly_id
 
     def title
       return self[:title] if self[:title].present?
