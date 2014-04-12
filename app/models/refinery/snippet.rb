@@ -11,6 +11,9 @@ module Refinery
 
     translates :title, :body
 
+    default_scope {
+      includes(:translations).joins(:translations)
+    }
 
     def title
       return self[:title] if self[:title].present?

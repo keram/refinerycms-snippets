@@ -21,6 +21,7 @@ module Refinery
           plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.admin_snippets_path }
           plugin.activity = {
             class_name: :'refinery/snippet',
+            order: 'refinery_snippets.updated_at DESC',
             title: 'title'
           }
         end
