@@ -1,35 +1,36 @@
 cs:
-  plugins:
-    snippets:
-      title: Výstřižky
-  admin:
-    snippets:
-      actions:
-        create_new: Přidat nový výstřižek
-        reorder: Přeuspořádat výstřižky
-        reorder_done: Dokončit přeuspořádávání výstřižků
-      records:
+  refinery:
+    plugins:
+      snippets:
         title: Výstřižky
-        sorry_no_results: Zadaným kritériím neodpovídají žádné výstřižky
-        no_items_yet: Žádné výstřižky zatím nebyly nalezeny. Klikněte na "Přidat nový výstřižek" pro přidání prvního výstřižku.
-      snippet:
-        view_live_html: Zobrazí výstřižek živě <br/><em>(zobrazí se v novém okně)</em>
-        edit: Upravit výstřižek
-        delete: Odstranit výstřižek
-    pages:
-      tabs:
-        snippets_content:
-          please_save_page_before: Před přidáním výstřižků prosím uložte tuto stránku.
-        snippets_field:
-          active: Aktivní
-          inactive: Neaktivní
-          add_after_body: Přidat za obsah
-          add_before_body: Přidat před obsah
-          after_body: Před obsah
-          before_body: Za obsah
-        snippets_list_item:
-          remove: Odstranit
-          edit: Upravit
-  snippets:
-    show:
-      other: Další výstřižky
+    admin:
+      snippets:
+        actions:
+          create_new: Přidat nový výstřižek
+          reorder: Přeuspořádat výstřižky
+          reorder_done: Dokončit přeuspořádávání výstřižků
+        records:
+          title: Výstřižky
+          sorry_no_results: Zadaným kritériím neodpovídají žádné výstřižky
+          no_items_yet: Žádné výstřižky zatím nebyly nalezeny. Klikněte na "Přidat nový výstřižek" pro přidání prvního výstřižku.
+        snippet:
+          view_live_html: Zobrazí výstřižek živě <br/><em>(zobrazí se v novém okně)</em>
+          edit: Upravit výstřižek
+          delete: Odstranit výstřižek
+      pages:
+        tabs:
+          snippets_content:
+            please_save_page_before: Před přidáním výstřižků prosím uložte tuto stránku.
+          snippets_field:
+            active: Aktivní
+            inactive: Neaktivní
+            add_after_body: Přidat za obsah
+            add_before_body: Přidat před obsah
+            after_body: Před obsah
+            before_body: Za obsah
+          snippets_list_item:
+            remove: Odstranit
+            edit: Upravit
+    snippets:
+      show:
+        other: Další výstřižky

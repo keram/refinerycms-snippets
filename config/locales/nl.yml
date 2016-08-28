@@ -1,21 +1,22 @@
 nl:
-  plugins:
-    snippets:
-      title: Snippets
-  admin:
-    snippets:
-      actions:
-        create_new: Maak een nieuwe Snippet
-        reorder: Wijzig de volgorde van de Snippets
-        reorder_done: Klaar met het wijzingen van de volgorde van de Snippets
-      records:
+  refinery:
+    plugins:
+      snippets:
         title: Snippets
-        sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
-        no_items_yet: Er zijn nog geen Snippets. Druk op 'Maak een nieuwe Snippet' om de eerste aan te maken.
-      snippet:
-        view_live_html: Bekijk deze snippet op de website <br/><em>(opent een nieuw venster)</em>
-        edit: Bewerk deze snippet
-        delete: Verwijder deze snippet voor eeuwig
-  snippets:
-    show:
-      other: Andere Snippets
+    admin:
+      snippets:
+        actions:
+          create_new: Maak een nieuwe Snippet
+          reorder: Wijzig de volgorde van de Snippets
+          reorder_done: Klaar met het wijzingen van de volgorde van de Snippets
+        records:
+          title: Snippets
+          sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+          no_items_yet: Er zijn nog geen Snippets. Druk op 'Maak een nieuwe Snippet' om de eerste aan te maken.
+        snippet:
+          view_live_html: Bekijk deze snippet op de website <br/><em>(opent een nieuw venster)</em>
+          edit: Bewerk deze snippet
+          delete: Verwijder deze snippet voor eeuwig
+    snippets:
+      show:
+        other: Andere Snippets
