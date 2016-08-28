@@ -3,34 +3,32 @@ en:
     plugins:
       snippets:
         title: Snippets
-    admin:
-      snippets:
-        actions:
-          create_new: Add New Snippet
-          reorder: Reorder Snippets
-          reorder_done: Done Reordering Snippets
-        records:
-          title: Snippets
-          sorry_no_results: Sorry! There are no results found.
-          no_items_yet: There are no Snippets yet. Click "Add New Snippet" to add your first snippet.
-        snippet:
-          view_live_html: View this snippet live <br/><em>(opens in a new window)</em>
-          edit: Edit this snippet
-          delete: Remove this snippet forever
-      pages:
-        tabs:
-          snippets_content:
-            please_save_page_before: Please save this page before you can add any snippets.
-          snippets_field:
-            active: Active
-            inactive: Inactive
-            add_after_body: Add after body
-            add_before_body: Add before body
-            after_body: After body
-            before_body: Before body
-          snippets_list_item:
-            remove: Remove
-            edit: Edit
     snippets:
-      show:
-        other: Other Snippets
+      admin:
+        snippets:
+          actions:
+            create_new: Add New Snippet
+            reorder: Reorder Snippets
+            reorder_done: Done Reordering Snippets
+          records:
+            title: Snippets
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Snippets yet. Click "Add New Snippet" to add your first snippet.
+          snippet:
+            view_live_html: View this snippet live <br/><em>(opens in a new window)</em>
+            edit: Edit this snippet
+            delete: Remove this snippet forever
+        pages:
+          tabs:
+            snippets_content:
+              please_save_page_before: Please save this page before you can add any snippets.
+            snippets_field:
+              active: Active
+              inactive: Inactive
+              add_after_body: Add after body
+              add_before_body: Add before body
+              after_body: After body
+              before_body: Before body
+            snippets_list_item:
+              remove: Remove
+              edit: Edit

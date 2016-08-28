@@ -11,12 +11,12 @@
     <% end %>
   </span>
   <span class='actions'>
-    <%= link_to refinery_icon_tag("application_edit.png"), edit_admin_snippet_path(snippet),
+    <%= link_to refinery_icon_tag("application_edit.png"), edit_snippets_admin_snippet_path(snippet),
          :title => t('.edit') %>
-    <%= link_to refinery_icon_tag("delete.png"), admin_snippet_path(snippet),
+    <%= link_to refinery_icon_tag("delete.png"), snippets_admin_snippet_path(snippet),
         :class => "cancel confirm-delete",
         :title => t('.delete'),
-        :confirm => t('message', :scope => 'shared.admin.delete', :title => snippet.title),
+        :confirm => t('message', :scope => 'refinery.admin.delete', :title => snippet.title),
         :method => :delete %>
   </span>
 </li>

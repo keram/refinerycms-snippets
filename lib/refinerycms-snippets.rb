@@ -19,13 +19,18 @@ module Refinery
       config.after_initialize do
         Refinery::Pages::Tab.register do |tab|
           tab.name = "snippets"
-          tab.partial = "/admin/pages/tabs/snippets"
+          tab.partial = "/refinery/snippets/admin/pages/tabs/snippets"
         end
         Refinery::Plugin.register do |plugin|
           plugin.name = "snippets"
-          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.admin_snippets_path }
+          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.snippets_admin_snippets_path }
           plugin.menu_match = /^\/?(admin|refinery)\/snippets/
         end
+        Rails.application.config.assets.precompile += %w(
+          page-snippet-picker.css
+          page-snippet-picker.js
+          part-snippets-select.js
+        )
       end
     end
   end

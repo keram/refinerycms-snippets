@@ -3,13 +3,13 @@
     <% if part.snippets.before.any? %>
       <h3><%= t('.before_body') %></h3>
       <ul>
-        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.before, :as => :snippet, :locals => {:part => part, :before_body => true} %>
+        <%= render :partial => '/refinery/snippets/admin/pages/tabs/snippets_list_item', :collection => part.snippets.before, :as => :snippet, :locals => {:part => part, :before_body => true} %>
       </ul>
     <% end %>
     <% if part.snippets.after.any? %>
       <h3><%= t('.after_body') %></h3>
       <ul>
-        <%= render :partial => '/admin/pages/tabs/snippets_list_item', :collection => part.snippets.after, :as => :snippet, :locals => {:part => part, :before_body => false} %>
+        <%= render :partial => '/refinery/snippets/admin/pages/tabs/snippets_list_item', :collection => part.snippets.after, :as => :snippet, :locals => {:part => part, :before_body => false} %>
       </ul>
     <% end %>
   </div>
@@ -23,12 +23,12 @@
             <span class="title"><%= snippet.title %></span>
             <div class="actions">
               <% unless snippet.after?(part) %>
-                <%= link_to t('.add_after_body'), {:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}, :class => 'add_icon add-snippet' %>
+                <%= link_to t('.add_after_body'), {:controller => 'refinery/snippets/admin/snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id}, :class => 'add_icon add-snippet' %>
               <% else %>
                 <span class="add_icon add-snippet"><%= t('.add_after_body') %></span>
               <% end %>
               <% unless snippet.before?(part) %>
-                <%= link_to t('.add_before_body'), {:controller => 'snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => 'true'}, :class => 'add_icon add-snippet' %>
+                <%= link_to t('.add_before_body'), {:controller => 'refinery/snippets/admin/snippets_page_parts', :action => 'add', :id => @page.id, :snippet_id => snippet.id, :part_id => part.id, :before_body => 'true'}, :class => 'add_icon add-snippet' %>
               <% else %>
                 <span class="add_icon add-snippet"><%= t('.add_before_body') %></span>
               <% end %>

@@ -13,10 +13,10 @@ module Refinery
             )
 
             unless request.xhr?
-              redirect_to (params[:continue_editing] =~ /1/ ? edit_admin_snippet_path(@snippet) : admin_snippets_url)
+              redirect_to (params[:continue_editing] =~ /1/ ? edit_snippets_admin_snippet_path(@snippet) : snippets_admin_snippets_url)
             else
               response = Hash.new
-              response['redirect'] = edit_admin_snippet_path(@snippet) if params[:continue_editing]
+              response['redirect'] = edit_snippets_admin_snippet_path(@snippet) if params[:continue_editing]
               render :json => response
             end
 

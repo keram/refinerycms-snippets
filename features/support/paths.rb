@@ -4,10 +4,10 @@ module NavigationHelpers
       def path_to(page_name)
         case page_name
         when /the list of snippets/
-          admin_snippets_path
+          snippets_admin_snippets_path
 
          when /the new snippet form/
-          new_admin_snippet_path
+          new_snippets_admin_snippet_path
         else
           nil
         end
