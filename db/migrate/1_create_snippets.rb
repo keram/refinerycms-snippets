@@ -7,14 +7,14 @@ class CreateSnippets < ActiveRecord::Migration
       t.integer :position, :null => false, :default => 0
       t.timestamps
     end
-
-    load(Rails.root.join('db', 'seeds', 'snippets.rb'))
   end
 
   def self.down
-    UserPlugin.destroy_all({:name => "snippets"})
+    if defined?(Refinery::UserPlugin)
+      Refinery::UserPlugin.destroy_all({:name => "snippets"})
+    end
 
-    Page.delete_all({:link_url => "/snippets"})
+    Refinery::Page.delete_all({:link_url => "/snippets"})
 
     drop_table :snippets
   end

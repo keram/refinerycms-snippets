@@ -1,15 +1,13 @@
-<%= form_for [:admin, @snippet] do |f| -%>
-  <%= render :partial => "/shared/admin/error_messages", :locals => {
+<%= form_for [:snippets, :admin, @snippet] do |f| -%>
+  <%= render :partial => "/refinery/admin/error_messages", :locals => {
           :object => @snippet,
           :include_object_name => true
         } %>
   
 
-  <%= render :partial => "locale_picker",
-             :locals => {
-               :current_locale => Thread.current[:globalize_locale]
-             } if defined?(::Refinery::I18n) %>
-  
+  <%= render '/refinery/admin/locale_picker', 
+               :current_locale => Globalize.locale if defined?(::Refinery::I18n) %>
+    
   <div class='field'>
     <%= f.label :title -%>
     <%= f.text_field :title, :class => 'larger widest' -%>
@@ -31,7 +29,7 @@
                 :f => f,
                 :continue_editing => true,
                 :delete_title => t('delete', :scope => 'admin.snippets.snippet'),
-                :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @snippet.title)
+                :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @snippet.title)
               } %>
 <% end -%>
 <% content_for :javascripts do %>

@@ -1,5 +1,3 @@
-require 'refinerycms-base'
-
 module Refinery
   module Snippets
     class Engine < Rails::Engine
@@ -9,34 +7,30 @@ module Refinery
         require 'extensions/pages_helper_extensions'
       end
 
-      initializer "static assets" do |app|
-        app.middleware.insert_after ::ActionDispatch::Static, ::ActionDispatch::Static, "#{root}/public"
-      end
-
       config.to_prepare do
-        PagePart.module_eval do
+        Refinery::PagePart.module_eval do
           has_many :snippet_page_parts, :dependent => :destroy
-          has_many :snippets, :through => :snippet_page_parts, :order => 'position ASC'
+          has_many :snippets, :through => :snippet_page_parts
         end
-        Page.send :include, Extensions::Page
-        PagesHelper.send :include, Extensions::PagesHelper
+        Refinery::Page.send :include, Extensions::Page
+        Refinery::Admin::PagesHelper.send :include, Extensions::PagesHelper
       end
 
       config.after_initialize do
-        ::Refinery::Pages::Tab.register do |tab|
+        Refinery::Pages::Tab.register do |tab|
           tab.name = "snippets"
-          tab.partial = "/admin/pages/tabs/snippets"
+          tab.partial = "/refinery/snippets/admin/pages/tabs/snippets"
         end
         Refinery::Plugin.register do |plugin|
           plugin.name = "snippets"
-          plugin.url = {:controller => '/admin/snippets'}
+          plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.snippets_admin_snippets_path }
           plugin.menu_match = /^\/?(admin|refinery)\/snippets/
-          plugin.activity = [{
-                               :class => Snippet
-                             }, {
-                               :class => SnippetPage
-                             }]
         end
+        Rails.application.config.assets.precompile += %w(
+          page-snippet-picker.css
+          page-snippet-picker.js
+          part-snippets-select.js
+        )
       end
     end
   end

@@ -1,6 +1,6 @@
 class SnippetPage < ActiveRecord::Base
   
-  set_table_name 'snippet_page'
+  self.table_name = 'snippet_page'
   
   belongs_to :snippet, :foreign_key => :snippet_id
   belongs_to :page, :foreign_key => :page_id
