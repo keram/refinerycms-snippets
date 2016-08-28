@@ -9,8 +9,6 @@ class TranslateSnippets < ActiveRecord::Migration
         :migrate_data => true
       })
     end
-
-    load(Rails.root.join('db', 'seeds', 'snippets.rb').to_s)
   end
 
   def self.down

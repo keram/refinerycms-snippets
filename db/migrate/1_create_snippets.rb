@@ -7,8 +7,6 @@ class CreateSnippets < ActiveRecord::Migration
       t.integer :position, :null => false, :default => 0
       t.timestamps
     end
-
-    load(Rails.root.join('db', 'seeds', 'snippets.rb'))
   end
 
   def self.down
