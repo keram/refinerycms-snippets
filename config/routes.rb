@@ -1,4 +1,4 @@
-Refinery::Application.routes.draw do
+Refinery::Core::Engine.routes.draw do
 
   scope(:path => 'refinery', :as => 'admin', :module => 'admin') do
     resources :snippets do
