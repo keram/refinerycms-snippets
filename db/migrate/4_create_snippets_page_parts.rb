@@ -13,7 +13,7 @@ class CreateSnippetsPageParts < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :snippet_page_parts
+    drop_table :snippets_page_parts
   end
 
 end
